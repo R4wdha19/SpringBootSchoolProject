@@ -2,7 +2,7 @@ package com.codeline.SpringBootPractice.School.project.Model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+
 
 import javax.persistence.*;
 
@@ -13,6 +13,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
+    @Column(name = "StudentName")
     String studentName;
     Integer studentRollNumber;
 
