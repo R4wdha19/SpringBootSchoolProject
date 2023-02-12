@@ -1,5 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
+import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,4 +17,9 @@ public class StudentService {
     public List<Student> getAllStudents(){
         return studentRepository.getAllStudents();
     }
+    public Student getStudentById(Integer id){
+        Student student=studentRepository.getStudentById(id);
+        return student;
+    }
+
 }

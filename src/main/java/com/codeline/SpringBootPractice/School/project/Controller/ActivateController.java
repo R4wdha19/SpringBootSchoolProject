@@ -11,6 +11,7 @@ import com.codeline.SpringBootPractice.School.project.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -40,6 +41,12 @@ public class ActivateController {
         return schools;
 
     }
+    @RequestMapping(value = "school/getById", method = RequestMethod.GET)
+    public School getSchoolById(@RequestParam Integer schoolId) {
+       School school = schoolService.getSchoolById(schoolId);
+        return school;
+
+    }
 
     @RequestMapping(value = "course/getAll", method = RequestMethod.GET)
     public List<Course> getAllCourses() {
@@ -47,18 +54,36 @@ public class ActivateController {
         courses = courseService.getAllCourses();
         return courses;
     }
+    @RequestMapping(value = "course/getById", method = RequestMethod.GET)
+    public Course getCourseById(@RequestParam Integer courseId) {
+        Course course = courseService.getCourseById(courseId);
+        return course;
 
+    }
     @RequestMapping(value = "mark/getAll", method = RequestMethod.GET)
     public List<Mark> getAllMarks(){
         List<Mark> marks = new ArrayList<>();
         marks = markService.getAllMarks();
         return marks;
     }
+    @RequestMapping(value = "mark/getById", method = RequestMethod.GET)
+    public Mark getMarkById(@RequestParam Integer markId) {
+        Mark mark = markService.getMarkById(markId);
+        return mark;
+
+    }
     @RequestMapping(value = "student/getAll", method = RequestMethod.GET)
     public List<Student> getAllStudents(){
         List<Student> students = new ArrayList<>();
         students = studentService.getAllStudents();
         return students;
+    }
+
+    @RequestMapping(value = "student/getById", method = RequestMethod.GET)
+    public Student getStudentById(@RequestParam Integer studentId) {
+        Student student = studentService.getStudentById(studentId);
+        return student;
+
     }
 
 }
