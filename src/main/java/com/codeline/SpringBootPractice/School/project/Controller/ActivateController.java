@@ -41,9 +41,10 @@ public class ActivateController {
         return schools;
 
     }
+
     @RequestMapping(value = "school/getById", method = RequestMethod.GET)
     public School getSchoolById(@RequestParam Integer schoolId) {
-       School school = schoolService.getSchoolById(schoolId);
+        School school = schoolService.getSchoolById(schoolId);
         return school;
 
     }
@@ -61,26 +62,30 @@ public class ActivateController {
         courses = courseService.getAllCourses();
         return courses;
     }
+
     @RequestMapping(value = "course/getById", method = RequestMethod.GET)
     public Course getCourseById(@RequestParam Integer courseId) {
         Course course = courseService.getCourseById(courseId);
         return course;
 
     }
+
     @RequestMapping(value = "mark/getAll", method = RequestMethod.GET)
-    public List<Mark> getAllMarks(){
+    public List<Mark> getAllMarks() {
         List<Mark> marks = new ArrayList<>();
         marks = markService.getAllMarks();
         return marks;
     }
+
     @RequestMapping(value = "mark/getById", method = RequestMethod.GET)
     public Mark getMarkById(@RequestParam Integer markId) {
         Mark mark = markService.getMarkById(markId);
         return mark;
 
     }
+
     @RequestMapping(value = "student/getAll", method = RequestMethod.GET)
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
         students = studentService.getAllStudents();
         return students;
@@ -92,10 +97,9 @@ public class ActivateController {
         return student;
 
     }
-    @RequestMapping(value = "student/getBySchoolId", method = RequestMethod.GET)
-    public Student getStudentBySchoolId(@RequestParam Integer schoolId) {
-        Student student = studentService.getStudentBySchoolId(schoolId);
-        return student;
+    @RequestMapping(value = "student/getStudentsBySchoolName", method = RequestMethod.GET)
+    public List<Student> getStudentsBySchoolName(@RequestParam String schoolName) {
+       return studentService.getStudentsBySchoolName(schoolName);
 
     }
 }

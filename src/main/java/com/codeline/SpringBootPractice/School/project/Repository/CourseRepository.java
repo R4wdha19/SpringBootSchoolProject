@@ -17,4 +17,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     @Query(value = "SELECT c from Course c where c.id = :courseId")
     Course getCourseById(@Param("courseId") Integer id);
+
+    List<Course> getCoursesByStudentId(@Param("studentId")Integer id);
+
 }
