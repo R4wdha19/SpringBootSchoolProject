@@ -48,6 +48,13 @@ public class ActivateController {
 
     }
 
+    @RequestMapping(value = "school/getByName", method = RequestMethod.GET)
+    public School getSchoolByName(@RequestParam String schoolName) {
+        School school = schoolService.getSchoolByName(schoolName);
+        return school;
+
+    }
+
     @RequestMapping(value = "course/getAll", method = RequestMethod.GET)
     public List<Course> getAllCourses() {
         List<Course> courses = new ArrayList<>();
@@ -85,5 +92,10 @@ public class ActivateController {
         return student;
 
     }
+    @RequestMapping(value = "student/getBySchoolId", method = RequestMethod.GET)
+    public Student getStudentBySchoolId(@RequestParam Integer schoolId) {
+        Student student = studentService.getStudentBySchoolId(schoolId);
+        return student;
 
+    }
 }

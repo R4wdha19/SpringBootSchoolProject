@@ -23,4 +23,10 @@ public class SchoolService {
         return school;
     }
 
+    public School getSchoolByName(String schoolName){
+        School school=schoolRepository.getSchoolByName(schoolName);
+        return school;
+    }
+
+
 }

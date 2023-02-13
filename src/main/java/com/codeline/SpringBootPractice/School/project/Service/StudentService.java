@@ -21,5 +21,8 @@ public class StudentService {
         Student student=studentRepository.getStudentById(id);
         return student;
     }
-
+    public Student getStudentBySchoolId(Integer id){
+        Student student=studentRepository.getStudentById(id);
+        return student;
+    }
 }

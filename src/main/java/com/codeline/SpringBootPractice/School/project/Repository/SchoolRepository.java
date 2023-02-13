@@ -19,5 +19,8 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = "SELECT s from School s where s.id = :schoolId")
     School getSchoolById(@Param("schoolId") Integer id);
 
+
+    @Query(value = "select s.id from School s where s.school_name = schoolName")
+    School getSchoolByName(@Param("schoolName")String schoolName);
 }
 
