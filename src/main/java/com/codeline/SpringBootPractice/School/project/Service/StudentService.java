@@ -26,6 +26,9 @@ public class StudentService {
         return student;
     }
 
+
+
+
     public List<Student> getStudentsBySchoolName(String schoolName){
         School school = schoolService.getSchoolByName(schoolName);
         Integer schoolId = school.getId();
@@ -33,6 +36,10 @@ public class StudentService {
         return students;
     }
 
+    public Student getStudentByStudentName(String studentName){
+       Student student = studentRepository.getStudentByStudentName(studentName);
+        return student;
+    }
 
 
 }

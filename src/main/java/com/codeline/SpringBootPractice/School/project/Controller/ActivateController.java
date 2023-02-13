@@ -102,4 +102,8 @@ public class ActivateController {
        return studentService.getStudentsBySchoolName(schoolName);
 
     }
+    @RequestMapping(value = "course/getCoursesByStudentName",method = RequestMethod.GET)
+    public List<Course> getCoursesByStudentName(@RequestParam String studentName){
+        return courseService.getCoursesByStudentName(studentName);
+    }
 }
