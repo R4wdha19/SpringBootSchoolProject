@@ -1,0 +1,23 @@
+ Api checklist
+ 
+ getAllInActive same but 0
+ getLatestRow check the id , the last one . the highest .
+ getLatestUpdated check the update date column highest date 
+ get<Entity Name>CreatedA	a\fterDate 
+	E.g. -> getStudentCreatedAfterDate
+	
+ ==========================
+ (delete means just changing isActive attribute to false)
+ deleteById
+ deleteAll
+ deleteBy<Column Name>
+	E.g. -> deleteByStudentName, deleteBySchoolName
+	
+ ===========================
+ create<Entity Name>
+	E.g. createStudent, createSchool
+ save function from repo 
+ ===========================
+ 
+ update<Entity Name>
+	E.g. updateStudent, updateSchool

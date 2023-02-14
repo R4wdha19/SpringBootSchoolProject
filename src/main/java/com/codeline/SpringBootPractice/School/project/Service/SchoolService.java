@@ -1,5 +1,4 @@
 package com.codeline.SpringBootPractice.School.project.Service;
-
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;

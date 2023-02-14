@@ -1,5 +1,4 @@
 package com.codeline.SpringBootPractice.School.project.Repository;
-import com.codeline.SpringBootPractice.School.project.Model.Mark;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
