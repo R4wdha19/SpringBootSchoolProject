@@ -39,4 +39,6 @@ public class CourseService {
         List<Course> courseList = courseRepository.getCoursesByStudentId(studentId);
         return courseList;
     }
+
+
 }

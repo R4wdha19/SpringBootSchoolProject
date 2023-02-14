@@ -2,6 +2,7 @@ package com.codeline.SpringBootPractice.School.project.Repository;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
 
+import com.codeline.SpringBootPractice.School.project.Model.Mark;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,4 +24,6 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "select c from Course c where c.student.id = :studentId")
     List<Course> getCoursesByStudentId(@Param("studentId")Integer id);
 
+    @Query(value = " select c from Course c where c.courseName = :courseName")
+    List<Mark> getMarksByCourseName(@Param("courseName")String courseName);
 }

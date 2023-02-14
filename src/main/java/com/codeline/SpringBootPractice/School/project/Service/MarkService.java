@@ -21,6 +21,10 @@ public class MarkService {
         return mark;
     }
 
+ /*   public List<Mark> getMarksByCourseName(String courseName){
+
+    }
+*/
 
 
 }
