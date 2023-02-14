@@ -1,6 +1,7 @@
 package com.codeline.SpringBootPractice.School.project.Controller;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
+import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,17 +18,29 @@ public class CourseController {
 @Autowired
 CourseService courseService;
 
-    @RequestMapping(value = "course/getAll", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public List<Course> getAllCourses() {
         List<Course> courses = new ArrayList<>();
         courses = courseService.getAllCourses();
         return courses;
     }
 
-    @RequestMapping(value = "course/getById", method = RequestMethod.GET)
+    @RequestMapping(value = "/getById", method = RequestMethod.GET)
     public Course getCourseById(@RequestParam Integer courseId) {
         Course course = courseService.getCourseById(courseId);
         return course;
 
+    }
+@RequestMapping(value = "/getByName",method = RequestMethod.GET)
+    public List<Course> getCourseByName(@RequestParam String courseName){
+       List<Course>  course = courseService.getCourseByName(courseName);
+        return course;
+    }
+
+    @RequestMapping(value = "getAllActiveCourses", method = RequestMethod.GET)
+    public List<Course> getAllActiveCourses(){
+        List<Course> courseList = new ArrayList<>();
+        courseList = courseService.getAllActiveCourses();
+        return courseList;
     }
 }

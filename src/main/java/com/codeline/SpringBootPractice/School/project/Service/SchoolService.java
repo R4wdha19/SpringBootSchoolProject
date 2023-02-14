@@ -28,5 +28,10 @@ public class SchoolService {
         return school;
     }
 
+    public List<School> getAllActiveSchools(){
+        List<School> schools= schoolRepository.getAllActiveSchools();
+        return schools;
+    }
+
 
 }

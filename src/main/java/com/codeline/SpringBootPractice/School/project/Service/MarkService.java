@@ -1,5 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
+import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.Mark;
 
 import com.codeline.SpringBootPractice.School.project.Repository.MarkRepository;
@@ -19,6 +20,15 @@ public class MarkService {
     public Mark getMarkById(Integer id){
         Mark mark=markRepository.getMarkById(id);
         return mark;
+    }
+
+    public List<Mark> getMarkByGrade(String grade){
+       List<Mark>  mark = markRepository.getMarkByGrade(grade);
+        return mark;
+    }
+    public List<Mark> getAllActiveMarks(){
+        List<Mark> marks = markRepository.getAllActiveMarks();
+        return marks;
     }
 
  /*   public List<Mark> getMarksByCourseName(String courseName){

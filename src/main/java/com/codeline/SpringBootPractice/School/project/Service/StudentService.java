@@ -1,5 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
+import com.codeline.SpringBootPractice.School.project.Model.Mark;
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
@@ -39,6 +40,10 @@ public class StudentService {
     public Student getStudentByStudentName(String studentName){
        Student student = studentRepository.getStudentByStudentName(studentName);
         return student;
+    }
+    public List<Student> getAllActiveStudents(){
+        List<Student> studentList = studentRepository.getAllActiveStudents();
+        return studentList;
     }
 
 

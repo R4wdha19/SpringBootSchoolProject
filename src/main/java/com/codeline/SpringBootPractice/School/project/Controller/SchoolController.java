@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
 public class SchoolController {
 @Autowired
 SchoolService schoolService;
-    @RequestMapping(value = "school/getAll", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public List<School> getAllSchools() {
         List<School> schools = new ArrayList<>();
         schools = schoolService.getAllSchools();
@@ -24,17 +23,23 @@ SchoolService schoolService;
 
     }
 
-    @RequestMapping(value = "school/getById", method = RequestMethod.GET)
+    @RequestMapping(value = "/getById", method = RequestMethod.GET)
     public School getSchoolById(@RequestParam Integer schoolId) {
         School school = schoolService.getSchoolById(schoolId);
         return school;
 
     }
 
-    @RequestMapping(value = "school/getByName", method = RequestMethod.GET)
+    @RequestMapping(value = "/getByName", method = RequestMethod.GET)
     public School getSchoolByName(@RequestParam String schoolName) {
         School school = schoolService.getSchoolByName(schoolName);
         return school;
 
+    }
+    @RequestMapping(value = "getAllActiveSchools", method = RequestMethod.GET)
+    public List<School> getAllActiveSchools(){
+        List<School> schoolList = new ArrayList<>();
+        schoolList = schoolService.getAllActiveSchools();
+        return schoolList;
     }
 }

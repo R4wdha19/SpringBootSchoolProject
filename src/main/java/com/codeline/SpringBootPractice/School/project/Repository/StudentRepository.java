@@ -1,4 +1,5 @@
 package com.codeline.SpringBootPractice.School.project.Repository;
+import com.codeline.SpringBootPractice.School.project.Model.Mark;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,5 +25,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query(value = "select st from Student st where st.studentName = :studentName")
     Student getStudentByStudentName(@Param("studentName") String studentName);
+
+    @Query(value = "select st from Student st where st.isActive = 1")
+    List<Student> getAllActiveStudents();
 
 }

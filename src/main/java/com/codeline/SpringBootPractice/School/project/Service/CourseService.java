@@ -7,6 +7,7 @@ import com.codeline.SpringBootPractice.School.project.Repository.CourseRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,5 +41,8 @@ public class CourseService {
         return courseList;
     }
 
-
+    public List<Course> getAllActiveCourses(){
+        List<Course> courses = courseRepository.getAllActiveCourses();
+        return courses;
+    }
 }

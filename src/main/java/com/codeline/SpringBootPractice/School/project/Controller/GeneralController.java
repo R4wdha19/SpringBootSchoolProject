@@ -30,7 +30,7 @@ public class GeneralController {
 
     @Autowired
     MarkService markService;
-    
+
 
     @RequestMapping(value = "student/getStudentsBySchoolName", method = RequestMethod.GET)
     public List<Student> getStudentsBySchoolName(@RequestParam String schoolName) {
