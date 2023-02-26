@@ -24,10 +24,13 @@ public class MarkService {
         return mark;
     }
     public List<Mark> getAllActiveMarks(){
-        List<Mark> marks = markRepository.getAllActiveMarks();
-        return marks;
+        List<Mark> allActiveMarks = markRepository.getAllActiveMarks();
+        return allActiveMarks;
     }
-
+    public List<Mark> getAllInActiveMarks(){
+        List<Mark> allInActiveMarks = markRepository.getAllInActiveMarks();
+        return allInActiveMarks;
+    }
  /*   public List<Mark> getMarksByCourseName(String courseName){
 
     }

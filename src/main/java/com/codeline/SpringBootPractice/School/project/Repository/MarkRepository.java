@@ -20,4 +20,7 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
 
     @Query(value = "select m from Mark m where m.isActive = 1")
     List<Mark> getAllActiveMarks();
+
+    @Query(value = "select m from Mark m where m.isActive = 0")
+    List<Mark> getAllInActiveMarks();
 }

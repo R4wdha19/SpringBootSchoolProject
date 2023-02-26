@@ -40,7 +40,13 @@ public class CourseService {
     }
 
     public List<Course> getAllActiveCourses(){
-        List<Course> courses = courseRepository.getAllActiveCourses();
-        return courses;
+        List<Course> allActiveCourses = courseRepository.getAllActiveCourses();
+        return allActiveCourses;
     }
+
+    public List<Course> getAllInActiveCourses(){
+        List<Course> allInActiveCourses = courseRepository.getAllInActiveCourses();
+        return allInActiveCourses;
+    }
+
 }

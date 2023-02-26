@@ -44,4 +44,12 @@ MarkService markService;
         return markList;
     }
 
+
+    @RequestMapping(value = "getAllActiveMarks", method = RequestMethod.GET)
+    public List<Mark> getAllInActiveMarks(){
+        List<Mark> markList = new ArrayList<>();
+        markList = markService.getAllInActiveMarks();
+        return markList;
+    }
+
 }

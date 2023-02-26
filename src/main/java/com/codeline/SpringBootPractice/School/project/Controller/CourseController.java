@@ -39,8 +39,15 @@ CourseService courseService;
 
     @RequestMapping(value = "getAllActiveCourses", method = RequestMethod.GET)
     public List<Course> getAllActiveCourses(){
-        List<Course> courseList = new ArrayList<>();
-        courseList = courseService.getAllActiveCourses();
-        return courseList;
+        List<Course> activeCourseList = new ArrayList<>();
+        activeCourseList = courseService.getAllActiveCourses();
+        return activeCourseList;
+    }
+
+    @RequestMapping(value = "getAllInActiveCourses", method = RequestMethod.GET)
+    public List<Course> getAllInActiveCourses(){
+        List<Course> inActiveCourseList = new ArrayList<>();
+        inActiveCourseList = courseService.getAllInActiveCourses();
+        return inActiveCourseList;
     }
 }
