@@ -1,9 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
-
-import com.codeline.SpringBootPractice.School.project.Model.Mark;
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
-import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
 import com.codeline.SpringBootPractice.School.project.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +11,7 @@ import java.util.List;
 public class StudentService {
 
     @Autowired
-    StudentRepository studentRepository;
+    StudentRepository studentRepository; // reference
 
     @Autowired
     SchoolService schoolService;
@@ -26,7 +23,6 @@ public class StudentService {
         Student student=studentRepository.getStudentById(id);
         return student;
     }
-
 
 
 

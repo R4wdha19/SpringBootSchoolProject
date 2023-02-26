@@ -25,5 +25,7 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
 
     @Query(value = "select s from School s where s.isActive = 0")
     List<School> getAllInActiveSchools();
+    @Query(value = "select  s from School s where s.createdDate >= '2022-02-25'")
+    List<School> getSchoolCreatedAfterDate();
 }
 

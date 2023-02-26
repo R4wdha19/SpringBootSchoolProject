@@ -36,6 +36,10 @@ public class SchoolService {
         List<School> allInActiveSchools= schoolRepository.getAllInActiveSchools();
         return allInActiveSchools;
     }
+    public List<School> getSchoolCreatedAfterDate(){
+        List<School> schools= schoolRepository.getSchoolCreatedAfterDate();
+        return schools;
+    }
 
 
 }

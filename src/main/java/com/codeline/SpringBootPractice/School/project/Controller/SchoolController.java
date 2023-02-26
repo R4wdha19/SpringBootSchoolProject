@@ -49,4 +49,11 @@ SchoolService schoolService;
         allInActiveSchools = schoolService.getAllInActiveSchools();
         return allInActiveSchools;
     }
+
+    @RequestMapping(value = "getSchoolCreatedAfterDate", method = RequestMethod.GET)
+    public List<School> getSchoolCreatedAfterDate(){
+        List<School> schools = new ArrayList<>();
+        schools = schoolService.getSchoolCreatedAfterDate();
+        return schools;
+    }
 }
