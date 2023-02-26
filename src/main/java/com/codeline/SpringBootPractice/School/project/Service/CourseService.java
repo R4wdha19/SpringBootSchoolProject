@@ -49,4 +49,9 @@ public class CourseService {
         return allInActiveCourses;
     }
 
+    public List<Course> getCourseCreatedAfterDate(){
+        List<Course> courses = courseRepository.getCourseCreatedAfterDate();
+        return courses;
+    }
+
 }

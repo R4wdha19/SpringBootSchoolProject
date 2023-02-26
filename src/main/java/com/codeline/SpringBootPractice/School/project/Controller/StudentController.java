@@ -47,4 +47,11 @@ StudentService studentService;
         AllInActiveStudents = studentService.getAllInActiveStudents();
         return AllInActiveStudents;
     }
+    @RequestMapping(value = "getStudentCreatedAfterDate", method = RequestMethod.GET)
+    public List<Student> getStudentCreatedAfterDate(){
+        List<Student> studentList = new ArrayList<>();
+        studentList = studentService.getStudentCreatedAfterDate();
+        return studentList;
+    }
+
 }

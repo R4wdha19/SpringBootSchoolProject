@@ -31,4 +31,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query(value = "select st from Student st where st.isActive = 0")
     List<Student> getAllInActiveStudents();
 
+    @Query(value = "select st from Student st where st.createdDate >= '2022-02-25'")
+    List<Student> getStudentCreatedAfterDate();
+
 }

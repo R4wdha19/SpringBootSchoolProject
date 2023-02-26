@@ -28,6 +28,9 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "select c from Course c where c.isActive = 0")
     List<Course> getAllInActiveCourses();
 
+    @Query(value = "select c from Course c where c.createdDate >= '2022-02-25'")
+    List<Course> getCourseCreatedAfterDate();
+
 /*    @Query(value = " select c from Course c where c.courseName = :courseName")
     List<Mark> getMarksByCourseName(@Param("courseName")String courseName);*/
 }

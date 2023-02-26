@@ -46,6 +46,10 @@ public class StudentService {
         List<Student> allInActiveStudents = studentRepository.getAllInActiveStudents();
         return allInActiveStudents;
     }
+    public List<Student> getStudentCreatedAfterDate(){
+        List<Student> studentCreatedAfterDate = studentRepository.getStudentCreatedAfterDate();
+        return studentCreatedAfterDate;
+    }
 
 
 }

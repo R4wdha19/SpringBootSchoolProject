@@ -50,4 +50,10 @@ CourseService courseService;
         inActiveCourseList = courseService.getAllInActiveCourses();
         return inActiveCourseList;
     }
+    @RequestMapping(value = "getCourseCreatedAfterDate", method = RequestMethod.GET)
+    public List<Course> getCourseCreatedAfterDate(){
+        List<Course> courseList = new ArrayList<>();
+        courseList = courseService.getCourseCreatedAfterDate();
+        return courseList;
+    }
 }
