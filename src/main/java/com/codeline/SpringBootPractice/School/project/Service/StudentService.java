@@ -42,8 +42,13 @@ public class StudentService {
         return student;
     }
     public List<Student> getAllActiveStudents(){
-        List<Student> studentList = studentRepository.getAllActiveStudents();
-        return studentList;
+        List<Student> allActiveStudents = studentRepository.getAllActiveStudents();
+        return allActiveStudents;
+    }
+
+    public List<Student> getAllInActiveStudents(){
+        List<Student> allInActiveStudents = studentRepository.getAllInActiveStudents();
+        return allInActiveStudents;
     }
 
 

@@ -38,8 +38,15 @@ StudentService studentService;
 
     @RequestMapping(value = "getAllActiveStudents", method = RequestMethod.GET)
     public List<Student> getAllActiveStudents(){
-        List<Student> studentList = new ArrayList<>();
-        studentList = studentService.getAllActiveStudents();
-        return studentList;
+        List<Student> AllActiveStudents = new ArrayList<>();
+        AllActiveStudents = studentService.getAllActiveStudents();
+        return AllActiveStudents;
+    }
+
+    @RequestMapping(value = "getAllInActiveStudents", method = RequestMethod.GET)
+    public List<Student> getAllInActiveStudents(){
+        List<Student> AllInActiveStudents = new ArrayList<>();
+        AllInActiveStudents = studentService.getAllInActiveStudents();
+        return AllInActiveStudents;
     }
 }
