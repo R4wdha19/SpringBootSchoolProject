@@ -28,8 +28,13 @@ public class SchoolService {
     }
 
     public List<School> getAllActiveSchools(){
-        List<School> schools= schoolRepository.getAllActiveSchools();
-        return schools;
+        List<School> allActiveSchools= schoolRepository.getAllActiveSchools();
+        return allActiveSchools;
+    }
+
+    public List<School> getAllInActiveSchools(){
+        List<School> allInActiveSchools= schoolRepository.getAllInActiveSchools();
+        return allInActiveSchools;
     }
 
 

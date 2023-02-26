@@ -38,8 +38,15 @@ SchoolService schoolService;
     }
     @RequestMapping(value = "getAllActiveSchools", method = RequestMethod.GET)
     public List<School> getAllActiveSchools(){
-        List<School> schoolList = new ArrayList<>();
-        schoolList = schoolService.getAllActiveSchools();
-        return schoolList;
+        List<School> activeSchools = new ArrayList<>();
+        activeSchools = schoolService.getAllActiveSchools();
+        return activeSchools;
+    }
+
+    @RequestMapping(value = "getAllInActiveSchools", method = RequestMethod.GET)
+    public List<School> getAllInActiveSchools(){
+        List<School> allInActiveSchools = new ArrayList<>();
+        allInActiveSchools = schoolService.getAllInActiveSchools();
+        return allInActiveSchools;
     }
 }

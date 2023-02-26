@@ -45,7 +45,7 @@ MarkService markService;
     }
 
 
-    @RequestMapping(value = "getAllActiveMarks", method = RequestMethod.GET)
+    @RequestMapping(value = "getAllInActiveMarks", method = RequestMethod.GET)
     public List<Mark> getAllInActiveMarks(){
         List<Mark> markList = new ArrayList<>();
         markList = markService.getAllInActiveMarks();
