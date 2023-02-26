@@ -51,5 +51,11 @@ MarkService markService;
         markList = markService.getAllInActiveMarks();
         return markList;
     }
+    @RequestMapping(value = "getMarkCreatedAfterDate", method = RequestMethod.GET)
+    public List<Mark> getMarkCreatedAfterDate(){
+        List<Mark> markList = new ArrayList<>();
+        markList = markService.getMarkCreatedAfterDate();
+        return markList;
+    }
 
 }

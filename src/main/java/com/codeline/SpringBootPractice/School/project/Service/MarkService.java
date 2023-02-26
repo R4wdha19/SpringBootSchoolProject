@@ -31,6 +31,14 @@ public class MarkService {
         List<Mark> allInActiveMarks = markRepository.getAllInActiveMarks();
         return allInActiveMarks;
     }
+
+    public List<Mark> getMarkCreatedAfterDate(){
+        List<Mark> markCreatedAfterDate = markRepository.getMarkCreatedAfterDate();
+        return markCreatedAfterDate;
+    }
+
+
+
  /*   public List<Mark> getMarksByCourseName(String courseName){
 
     }

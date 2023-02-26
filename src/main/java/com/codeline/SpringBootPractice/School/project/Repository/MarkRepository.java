@@ -23,4 +23,8 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
 
     @Query(value = "select m from Mark m where m.isActive = 0")
     List<Mark> getAllInActiveMarks();
+
+    @Query(value = "select m from Mark m where m.createdDate >= '2022-02-25'")
+    List<Mark> getMarkCreatedAfterDate();
+
 }
