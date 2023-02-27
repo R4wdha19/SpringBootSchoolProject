@@ -33,5 +33,8 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
 
     @Query(value = "select s from School s where s.id = (select Max(s.id) from School s )")
     School getLatestRow();
+
+    @Query(value = " select s from School s where s.updatedDate = (select Max(s.updatedDate) from School s)")
+    School getLatestUpdatedDate();
 }
 

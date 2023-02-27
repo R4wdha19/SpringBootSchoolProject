@@ -13,8 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "school")
 public class SchoolController {
-@Autowired
-SchoolService schoolService;
+    @Autowired
+    SchoolService schoolService;
+
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public List<School> getAllSchools() {
         List<School> schools = new ArrayList<>();
@@ -36,37 +37,46 @@ SchoolService schoolService;
         return school;
 
     }
+
     @RequestMapping(value = "getAllActiveSchools", method = RequestMethod.GET)
-    public List<School> getAllActiveSchools(){
+    public List<School> getAllActiveSchools() {
         List<School> activeSchools = new ArrayList<>();
         activeSchools = schoolService.getAllActiveSchools();
         return activeSchools;
     }
 
     @RequestMapping(value = "getAllInActiveSchools", method = RequestMethod.GET)
-    public List<School> getAllInActiveSchools(){
+    public List<School> getAllInActiveSchools() {
         List<School> allInActiveSchools = new ArrayList<>();
         allInActiveSchools = schoolService.getAllInActiveSchools();
         return allInActiveSchools;
     }
 
     @RequestMapping(value = "getSchoolCreatedAfterDate", method = RequestMethod.GET)
-    public List<School> getSchoolCreatedAfterDate(){
+    public List<School> getSchoolCreatedAfterDate() {
         List<School> schools = new ArrayList<>();
         schools = schoolService.getSchoolCreatedAfterDate();
         return schools;
     }
+
     public void updateCreatedDateByUserInput(@RequestBody SchoolRequestForCreateDateUpdate data) throws ParseException {
         schoolService.updateCreatedDateByUserInput(data.getDate(), data.getId());
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
-    public void createSchool(@RequestParam String schoolName){
+    public void createSchool(@RequestParam String schoolName) {
         schoolService.createSchool(schoolName);
     }
-    @RequestMapping(value = "getLatestRow",method = RequestMethod.GET)
-    public School getLatestRow(){
-        School school=schoolService.getLatestRow();
+
+    @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
+    public School getLatestRow() {
+        School school = schoolService.getLatestRow();
+        return school;
+    }
+
+    @RequestMapping(value = "getLatestUpdatedDate", method = RequestMethod.GET)
+    public School getLatestUpdatedDate() {
+        School school = schoolService.getLatestUpdatedDate();
         return school;
     }
 }

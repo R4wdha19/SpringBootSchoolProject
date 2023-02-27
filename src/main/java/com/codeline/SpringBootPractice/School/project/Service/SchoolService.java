@@ -62,10 +62,15 @@ public class SchoolService {
         school.setIsActive(Boolean.TRUE);
         schoolRepository.save(school);
     }
-public School getLatestRow(){
 
-      School school= schoolRepository.getLatestRow();
-       return school;
-}
+    public School getLatestRow() {
+        School school = schoolRepository.getLatestRow();
+        return school;
+    }
+
+    public School getLatestUpdatedDate() {
+        School school = schoolRepository.getLatestUpdatedDate();
+        return school;
+    }
 
 }
