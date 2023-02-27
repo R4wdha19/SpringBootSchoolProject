@@ -17,4 +17,6 @@ public class BaseEntity {
     @UpdateTimestamp
     Date updatedDate;
     Boolean isActive;
+
+
 }

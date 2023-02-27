@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+//YOU DONT EVEN HAVE 1 Create API
 @RestController
 @RequestMapping(value = "student")
 public class StudentController {

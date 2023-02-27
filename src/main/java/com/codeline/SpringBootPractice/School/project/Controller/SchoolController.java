@@ -59,4 +59,14 @@ SchoolService schoolService;
     public void updateCreatedDateByUserInput(@RequestBody SchoolRequestForCreateDateUpdate data) throws ParseException {
         schoolService.updateCreatedDateByUserInput(data.getDate(), data.getId());
     }
+
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public void createSchool(@RequestParam String schoolName){
+        schoolService.createSchool(schoolName);
+    }
+    @RequestMapping(value = "getLatestRow",method = RequestMethod.GET)
+    public School getLatestRow(){
+        School school=schoolService.getLatestRow();
+        return school;
+    }
 }
