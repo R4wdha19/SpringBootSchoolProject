@@ -4,6 +4,7 @@ import com.codeline.SpringBootPractice.School.project.Repository.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 @Service
 public class MarkService {
@@ -32,8 +33,8 @@ public class MarkService {
         return allInActiveMarks;
     }
 
-    public List<Mark> getMarkCreatedAfterDate(){
-        List<Mark> markCreatedAfterDate = markRepository.getMarkCreatedAfterDate();
+    public List<Mark> getMarkCreatedAfterDate(String createdDate ){
+        List<Mark> markCreatedAfterDate = markRepository.getMarkCreatedAfterDate(createdDate);
         return markCreatedAfterDate;
     }
 

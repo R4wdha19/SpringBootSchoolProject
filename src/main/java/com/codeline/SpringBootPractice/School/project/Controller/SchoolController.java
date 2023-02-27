@@ -1,12 +1,12 @@
 package com.codeline.SpringBootPractice.School.project.Controller;
 
 import com.codeline.SpringBootPractice.School.project.Model.School;
+import com.codeline.SpringBootPractice.School.project.RequestObjects.SchoolRequestForCreateDateUpdate;
 import com.codeline.SpringBootPractice.School.project.Service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,5 +55,8 @@ SchoolService schoolService;
         List<School> schools = new ArrayList<>();
         schools = schoolService.getSchoolCreatedAfterDate();
         return schools;
+    }
+    public void updateCreatedDateByUserInput(@RequestBody SchoolRequestForCreateDateUpdate data) throws ParseException {
+        schoolService.updateCreatedDateByUserInput(data.getDate(), data.getId());
     }
 }

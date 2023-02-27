@@ -3,8 +3,10 @@ import com.codeline.SpringBootPractice.School.project.Model.Mark;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -24,7 +26,7 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
     @Query(value = "select m from Mark m where m.isActive = 0")
     List<Mark> getAllInActiveMarks();
 
-    @Query(value = "select m from Mark m where m.createdDate >= '2022-02-25'")
-    List<Mark> getMarkCreatedAfterDate();
+    @Query(value = "select m from Mark m where m.createdDate >= :createdDate")
+    List<Mark> getMarkCreatedAfterDate(@Param("createdDate")String createdDate);
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -52,9 +53,9 @@ MarkService markService;
         return markList;
     }
     @RequestMapping(value = "getMarkCreatedAfterDate", method = RequestMethod.GET)
-    public List<Mark> getMarkCreatedAfterDate(){
+    public List<Mark> getMarkCreatedAfterDate(@RequestParam String createdDate){
         List<Mark> markList = new ArrayList<>();
-        markList = markService.getMarkCreatedAfterDate();
+        markList = markService.getMarkCreatedAfterDate(createdDate);
         return markList;
     }
 

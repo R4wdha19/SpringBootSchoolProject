@@ -4,7 +4,10 @@ import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class SchoolService {
@@ -39,6 +42,15 @@ public class SchoolService {
     public List<School> getSchoolCreatedAfterDate(){
         List<School> schools= schoolRepository.getSchoolCreatedAfterDate();
         return schools;
+
+    }
+
+    public void updateCreatedDateByUserInput(String Date,Integer id) throws ParseException {
+        DateFormat dateFormater=new SimpleDateFormat("yyyy-MM-dd");
+        Date usableDate=dateFormater.parse(Date);
+        School school=schoolRepository.getSchoolById(id);
+        school.setCreatedDate(usableDate);
+        schoolRepository.save(school);
     }
 
 
