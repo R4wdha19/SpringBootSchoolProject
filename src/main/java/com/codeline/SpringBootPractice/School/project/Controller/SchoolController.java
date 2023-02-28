@@ -16,7 +16,7 @@ public class SchoolController {
     @Autowired
     SchoolService schoolService;
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    @RequestMapping(value = "getAll", method = RequestMethod.GET)
     public List<School> getAllSchools() {
         List<School> schools = new ArrayList<>();
         schools = schoolService.getAllSchools();
@@ -24,14 +24,14 @@ public class SchoolController {
 
     }
 
-    @RequestMapping(value = "/getById", method = RequestMethod.GET)
+    @RequestMapping(value = "getById", method = RequestMethod.GET)
     public School getSchoolById(@RequestParam Integer schoolId) {
         School school = schoolService.getSchoolById(schoolId);
         return school;
 
     }
 
-    @RequestMapping(value = "/getByName", method = RequestMethod.GET)
+    @RequestMapping(value = "getByName", method = RequestMethod.GET)
     public School getSchoolByName(@RequestParam String schoolName) {
         School school = schoolService.getSchoolByName(schoolName);
         return school;
@@ -63,7 +63,7 @@ public class SchoolController {
         schoolService.updateCreatedDateByUserInput(data.getDate(), data.getId());
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.GET)
+    @RequestMapping(value = "createSchool", method = RequestMethod.GET)
     public void createSchool(@RequestParam String schoolName) {
         schoolService.createSchool(schoolName);
     }
@@ -78,5 +78,12 @@ public class SchoolController {
     public School getLatestUpdatedDate() {
         School school = schoolService.getLatestUpdatedDate();
         return school;
+    }
+
+    @RequestMapping(value = "deleteSchoolById", method = RequestMethod.GET)
+    public School deleteSchoolById(@RequestParam Integer schoolId) {
+        School school = schoolService.deleteSchoolById(schoolId);
+        return school;
+
     }
 }

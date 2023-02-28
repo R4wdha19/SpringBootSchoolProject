@@ -8,4 +8,4 @@
 		 select * from school
 		 select * from student
 	select c.* from course c where c.created_date >= '2022-02-25'
-		 
+	  
