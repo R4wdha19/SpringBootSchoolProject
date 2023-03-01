@@ -1,5 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Repository;
 import com.codeline.SpringBootPractice.School.project.Model.Mark;
+import com.codeline.SpringBootPractice.School.project.Model.School;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,5 +29,11 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
 
     @Query(value = "select m from Mark m where m.createdDate >= :createdDate")
     List<Mark> getMarkCreatedAfterDate(@Param("createdDate")String createdDate);
+
+    @Query(value = "select m from Mark m where m.id = (select Max(m.id) from Mark m)")
+    Mark getLatestRow();
+
+    @Query(value = " select m from Mark m where m.updatedDate = (select Max(m.updatedDate) from Mark m)")
+    Mark getLatestUpdatedDate();
 
 }

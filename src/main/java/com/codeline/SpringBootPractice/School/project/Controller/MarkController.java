@@ -58,5 +58,15 @@ MarkService markService;
         markList = markService.getMarkCreatedAfterDate(createdDate);
         return markList;
     }
+    @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
+    public Mark getLatestRow() {
+        Mark mark = markService.getLatestRow();
+        return mark;
+    }
 
+    @RequestMapping(value = "getLatestUpdatedDate", method = RequestMethod.GET)
+    public Mark getLatestUpdatedDate() {
+        Mark mark = markService.getLatestUpdatedDate();
+        return mark;
+    }
 }

@@ -1,5 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 import com.codeline.SpringBootPractice.School.project.Model.Mark;
+import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Repository.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,15 @@ public class MarkService {
         List<Mark> markCreatedAfterDate = markRepository.getMarkCreatedAfterDate(createdDate);
         return markCreatedAfterDate;
     }
+    public Mark getLatestRow() {
+        Mark mark = markRepository.getLatestRow();
+        return mark;
+    }
 
+    public Mark getLatestUpdatedDate() {
+        Mark mark = markRepository.getLatestUpdatedDate();
+        return mark;
+    }
 
 
  /*   public List<Mark> getMarksByCourseName(String courseName){
