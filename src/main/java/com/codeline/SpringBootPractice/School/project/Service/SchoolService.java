@@ -82,5 +82,9 @@ public class SchoolService {
     public void deleteAllSchool() {
         schoolRepository.deleteAllSchoolsByIsActiveFalse();
     }
-
+    public void deleteSchoolByName(String schoolName) {
+        School school = schoolRepository.getSchoolByName(schoolName);
+        school.setIsActive(false);
+        schoolRepository.save(school);
+    }
 }

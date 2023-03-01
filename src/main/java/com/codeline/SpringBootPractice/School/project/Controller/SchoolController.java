@@ -89,4 +89,9 @@ public class SchoolController {
     public void deleteAllSchools(){
         schoolService.deleteAllSchool();
     }
+
+    @RequestMapping(value = "deleteSchoolByName")
+    public void deleteSchoolByName(@RequestParam String schoolName) {
+        schoolService.deleteSchoolByName(schoolName);
+    }
 }

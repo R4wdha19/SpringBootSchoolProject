@@ -70,5 +70,9 @@ public class StudentService {
         studentRepository.deleteAllStudents();
     }
 
-
+    public void deleteStudentByName(String studentName) {
+        Student student = studentRepository.getStudentByStudentName(studentName);
+        student.setIsActive(false);
+        studentRepository.save(student);
+    }
 }

@@ -73,4 +73,10 @@ public class CourseService {
     public void deleteAllCourses() {
         courseRepository.deleteAllCourses();
     }
+
+    public void deleteCourseByName(String courseName) {
+       List <Course> course = courseRepository.getCourseByName(courseName);
+        course.stream().forEach(x->x.setIsActive(false));
+        courseRepository.saveAll(course);
+    }
 }

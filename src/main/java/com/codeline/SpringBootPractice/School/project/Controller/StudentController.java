@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-//YOU DONT EVEN HAVE 1 Create API
+
 @RestController
 @RequestMapping(value = "student")
 public class StudentController {
@@ -75,4 +75,10 @@ StudentService studentService;
     public void deleteAllStudents(){
         studentService.deleteAllStudents();
     }
+
+    @RequestMapping(value = "deleteStudentByName")
+    public void deleteStudentByName(@RequestParam String studentName) {
+        studentService.deleteStudentByName(studentName);
+    }
+
 }

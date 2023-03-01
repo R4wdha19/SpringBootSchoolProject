@@ -79,4 +79,10 @@ MarkService markService;
         markService.deleteAllMarks();
     }
 
+    @RequestMapping(value = "deleteMarkByGrade")
+    public void deleteMarkByGrade(@RequestParam String markGrade) {
+        markService.deleteMarkByGrade(markGrade);
+    }
+
 }
+

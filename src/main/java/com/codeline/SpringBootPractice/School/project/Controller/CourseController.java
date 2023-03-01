@@ -79,4 +79,9 @@ CourseService courseService;
         courseService.deleteAllCourses();
     }
 
+    @RequestMapping(value = "deleteCourseByName")
+    public void deleteCourseByName(@RequestParam String courseName) {
+        courseService.deleteCourseByName(courseName);
+    }
+
 }

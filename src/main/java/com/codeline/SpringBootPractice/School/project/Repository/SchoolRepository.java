@@ -45,13 +45,6 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     void deleteAllSchoolsByIsActiveFalse();
 
 
-   /* @Query(value = "  Update school Set is_active = 0 where id =:schoolId", nativeQuery = true)
-    School deleteSchoolById(@Param("schoolId") Integer id);*/
-
-  /*  @Query(value = " select s from School s where s.isActive =(Update school  Set isActive = 0 )")
-    List<School> deleteAll();
-
-    School deleteByName();*/
 
 }
 
