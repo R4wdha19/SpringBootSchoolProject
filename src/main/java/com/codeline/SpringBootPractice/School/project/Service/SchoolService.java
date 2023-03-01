@@ -73,9 +73,14 @@ public class SchoolService {
         return school;
     }
 
-  public void deleteSchoolById(Integer schoolId) {
+    public void deleteSchoolById(Integer schoolId) {
         School school = schoolRepository.getSchoolById(schoolId);
         school.setIsActive(false);
-      schoolRepository.save(school);
+        schoolRepository.save(school);
     }
+
+    public void deleteAllSchool() {
+        schoolRepository.deleteAllSchoolsByIsActiveFalse();
+    }
+
 }

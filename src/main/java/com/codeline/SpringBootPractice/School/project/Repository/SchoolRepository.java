@@ -2,10 +2,12 @@ package com.codeline.SpringBootPractice.School.project.Repository;
 
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -37,6 +39,10 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = " select s from School s where s.updatedDate = (select Max(s.updatedDate) from School s)")
     School getLatestUpdatedDate();
 
+    @Modifying
+    @Transactional
+    @Query(value = "Update School s Set s.isActive =false")
+    void deleteAllSchoolsByIsActiveFalse();
 
 
    /* @Query(value = "  Update school Set is_active = 0 where id =:schoolId", nativeQuery = true)

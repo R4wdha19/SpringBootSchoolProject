@@ -84,4 +84,9 @@ public class SchoolController {
     public void deleteSchoolById(@RequestParam Integer schoolId) {
          schoolService.deleteSchoolById(schoolId);
     }
+
+    @RequestMapping(value = "deleteAll", method = RequestMethod.GET)
+    public void deleteAllSchools(){
+        schoolService.deleteAllSchool();
+    }
 }
