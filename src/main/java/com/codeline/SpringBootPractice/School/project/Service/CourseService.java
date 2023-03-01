@@ -69,4 +69,8 @@ public class CourseService {
         course.setIsActive(false);
         courseRepository.save(course);
     }
+
+    public void deleteAllCourses() {
+        courseRepository.deleteAllCourses();
+    }
 }

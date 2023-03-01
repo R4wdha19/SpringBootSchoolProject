@@ -71,4 +71,8 @@ StudentService studentService;
         studentService.deleteStudentById(studentId);
     }
 
+    @RequestMapping(value = "deleteAll", method = RequestMethod.GET)
+    public void deleteAllStudents(){
+        studentService.deleteAllStudents();
+    }
 }

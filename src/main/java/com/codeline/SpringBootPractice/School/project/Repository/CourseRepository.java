@@ -3,10 +3,12 @@ package com.codeline.SpringBootPractice.School.project.Repository;
 import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -20,8 +22,9 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     @Query(value = "select c from Course c where c.courseName = :courseName")
     List<Course> getCourseByName(@Param("courseName") String courseName);
+
     @Query(value = "select c from Course c where c.student.id = :studentId")
-    List<Course> getCoursesByStudentId(@Param("studentId")Integer id);
+    List<Course> getCoursesByStudentId(@Param("studentId") Integer id);
 
     @Query(value = "select c from Course c where c.isActive = 1")
     List<Course> getAllActiveCourses();
@@ -37,6 +40,11 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     @Query(value = " select c from Course c where c.updatedDate = (select Max(c.updatedDate) from Course c)")
     Course getLatestUpdatedDate();
+
+    @Modifying
+    @Transactional
+    @Query(value = "update Course c Set c.isActive = false")
+    void deleteAllCourses();
 
 /*    @Query(value = " select c from Course c where c.courseName = :courseName")
     List<Mark> getMarksByCourseName(@Param("courseName")String courseName);*/

@@ -66,6 +66,9 @@ public class StudentService {
         student.setIsActive(false);
         studentRepository.save(student);
     }
+    public void deleteAllStudents() {
+        studentRepository.deleteAllStudents();
+    }
 
 
 }

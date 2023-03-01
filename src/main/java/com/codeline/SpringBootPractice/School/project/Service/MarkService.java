@@ -53,10 +53,11 @@ public class MarkService {
         markRepository.save(mark);
     }
 
- /*   public List<Mark> getMarksByCourseName(String courseName){
-
+    public void deleteAllMarks() {
+        markRepository.deleteAllMarks();
     }
-*/
+
+
 
 
 }

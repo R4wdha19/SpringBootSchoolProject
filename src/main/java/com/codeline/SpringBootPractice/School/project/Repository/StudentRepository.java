@@ -2,10 +2,12 @@ package com.codeline.SpringBootPractice.School.project.Repository;
 
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -13,7 +15,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query(value = "SELECT st from Student st")
     List<Student> getAllStudents();
-
 
 
     @Query(value = "SELECT st from Student st where st.id = :studentId")
@@ -42,10 +43,10 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query(value = " select st from Student st where st.updatedDate = (select Max(st.updatedDate) from Student st)")
     Student getLatestUpdatedDate();
 
-
-   /* @Query(value = "update student set isActive = 0 where id =1; ")
-    Student deleteStudentById(@Param("studentId") Integer id);*/
-
+    @Modifying
+    @Transactional
+    @Query(value = "update Student st Set st.isActive = false")
+    void deleteAllStudents();
 
 
 }

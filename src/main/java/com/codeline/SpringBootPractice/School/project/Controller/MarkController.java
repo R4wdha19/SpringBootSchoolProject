@@ -72,4 +72,11 @@ MarkService markService;
     public void deleteMarkById(@RequestParam Integer markId) {
         markService.deleteMarkById(markId);
     }
+
+
+    @RequestMapping(value = "deleteAll", method = RequestMethod.GET)
+    public void deleteAllMarks(){
+        markService.deleteAllMarks();
+    }
+
 }
