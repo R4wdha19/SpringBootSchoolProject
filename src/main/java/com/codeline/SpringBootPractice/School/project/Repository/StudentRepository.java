@@ -1,4 +1,5 @@
 package com.codeline.SpringBootPractice.School.project.Repository;
+
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,6 +34,15 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query(value = "select st from Student st where st.createdDate >= '2022-02-25'")
     List<Student> getStudentCreatedAfterDate();
+
+
+    @Query(value = "select st from Student st where st.id = (select Max(st.id) from Student st )")
+    Student getLatestRow();
+
+    @Query(value = " select st from Student st where st.updatedDate = (select Max(st.updatedDate) from Student st)")
+    Student getLatestUpdatedDate();
+
+
    /* @Query(value = "update student set isActive = 0 where id =1; ")
     Student deleteStudentById(@Param("studentId") Integer id);*/
 

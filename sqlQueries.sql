@@ -8,4 +8,5 @@
 		 select * from school
 		 select * from student
 	select c.* from course c where c.created_date >= '2022-02-25'
-	  
+	  Update school Set is_active = 0 where id = 1
+	  Update school s Set s.isActive = 0 

@@ -1,4 +1,5 @@
 package com.codeline.SpringBootPractice.School.project.Controller;
+import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,17 @@ StudentService studentService;
         List<Student> studentList = new ArrayList<>();
         studentList = studentService.getStudentCreatedAfterDate();
         return studentList;
+    }
+    @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
+    public Student getLatestRow() {
+        Student student = studentService.getLatestRow();
+        return student;
+    }
+
+    @RequestMapping(value = "getLatestUpdatedDate", method = RequestMethod.GET)
+    public Student getLatestUpdatedDate() {
+        Student student = studentService.getLatestUpdatedDate();
+        return student;
     }
 
 }

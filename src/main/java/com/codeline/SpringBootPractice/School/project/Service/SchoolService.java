@@ -73,8 +73,8 @@ public class SchoolService {
         return school;
     }
 
-    public School deleteSchoolById(Integer schoolId) {
+ /*   public School deleteSchoolById(Integer schoolId) {
         School school = schoolRepository.deleteSchoolById(schoolId);
         return school;
-    }
+    }*/
 }
