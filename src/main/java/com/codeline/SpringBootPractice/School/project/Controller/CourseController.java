@@ -56,4 +56,16 @@ CourseService courseService;
         courseList = courseService.getCourseCreatedAfterDate();
         return courseList;
     }
+
+    @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
+    public Course getLatestRow() {
+        Course course = courseService.getLatestRow();
+        return course;
+    }
+
+    @RequestMapping(value = "getLatestUpdatedDate", method = RequestMethod.GET)
+    public Course getLatestUpdatedDate() {
+        Course course = courseService.getLatestUpdatedDate();
+        return course;
+    }
 }

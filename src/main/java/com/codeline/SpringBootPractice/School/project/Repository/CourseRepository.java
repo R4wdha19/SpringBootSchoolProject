@@ -1,6 +1,7 @@
 package com.codeline.SpringBootPractice.School.project.Repository;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
+import com.codeline.SpringBootPractice.School.project.Model.School;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -30,6 +31,12 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     @Query(value = "select c from Course c where c.createdDate >= '2022-02-25'")
     List<Course> getCourseCreatedAfterDate();
+
+    @Query(value = "select c from Course c where c.id = (select Max(c.id) from Course c )")
+    Course getLatestRow();
+
+    @Query(value = " select c from Course c where c.updatedDate = (select Max(c.updatedDate) from Course c)")
+    Course getLatestUpdatedDate();
 
 /*    @Query(value = " select c from Course c where c.courseName = :courseName")
     List<Mark> getMarksByCourseName(@Param("courseName")String courseName);*/

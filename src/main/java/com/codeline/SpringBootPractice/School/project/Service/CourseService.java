@@ -53,5 +53,13 @@ public class CourseService {
         List<Course> courses = courseRepository.getCourseCreatedAfterDate();
         return courses;
     }
+    public Course getLatestRow() {
+        Course course = courseRepository.getLatestRow();
+        return course;
+    }
 
+    public Course getLatestUpdatedDate() {
+        Course course = courseRepository.getLatestUpdatedDate();
+        return course;
+    }
 }
