@@ -37,6 +37,8 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = " select s from School s where s.updatedDate = (select Max(s.updatedDate) from School s)")
     School getLatestUpdatedDate();
 
+
+
    /* @Query(value = "  Update school Set is_active = 0 where id =:schoolId", nativeQuery = true)
     School deleteSchoolById(@Param("schoolId") Integer id);*/
 

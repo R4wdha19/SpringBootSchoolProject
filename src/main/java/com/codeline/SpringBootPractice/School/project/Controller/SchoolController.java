@@ -80,10 +80,8 @@ public class SchoolController {
         return school;
     }
 
-/*    @RequestMapping(value = "deleteSchoolById", method = RequestMethod.GET)
-    public School deleteSchoolById(@RequestParam Integer schoolId) {
-        School school = schoolService.deleteSchoolById(schoolId);
-        return school;
-
-    }*/
+    @RequestMapping(value = "deleteSchoolById")
+    public void deleteSchoolById(@RequestParam Integer schoolId) {
+         schoolService.deleteSchoolById(schoolId);
+    }
 }
