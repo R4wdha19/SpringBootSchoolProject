@@ -66,5 +66,9 @@ StudentService studentService;
         Student student = studentService.getLatestUpdatedDate();
         return student;
     }
+    @RequestMapping(value = "deleteStudentById")
+    public void deleteStudentById(@RequestParam Integer studentId) {
+        studentService.deleteStudentById(studentId);
+    }
 
 }

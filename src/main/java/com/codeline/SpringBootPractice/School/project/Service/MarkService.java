@@ -47,7 +47,11 @@ public class MarkService {
         Mark mark = markRepository.getLatestUpdatedDate();
         return mark;
     }
-
+    public void deleteMarkById(Integer markId) {
+        Mark mark = markRepository.getMarkById(markId);
+        mark.setIsActive(false);
+        markRepository.save(mark);
+    }
 
  /*   public List<Mark> getMarksByCourseName(String courseName){
 

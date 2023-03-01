@@ -61,5 +61,11 @@ public class StudentService {
         return student;
     }
 
+    public void deleteStudentById(Integer studentId) {
+        Student student = studentRepository.getStudentById(studentId);
+        student.setIsActive(false);
+        studentRepository.save(student);
+    }
+
 
 }

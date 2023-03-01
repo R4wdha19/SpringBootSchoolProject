@@ -1,7 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Controller;
 
 import com.codeline.SpringBootPractice.School.project.Model.Mark;
-import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Service.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -68,5 +66,10 @@ MarkService markService;
     public Mark getLatestUpdatedDate() {
         Mark mark = markService.getLatestUpdatedDate();
         return mark;
+    }
+
+    @RequestMapping(value = "deleteMarkById")
+    public void deleteMarkById(@RequestParam Integer markId) {
+        markService.deleteMarkById(markId);
     }
 }

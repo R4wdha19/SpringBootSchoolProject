@@ -1,6 +1,7 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
+import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,11 @@ public class CourseService {
     public Course getLatestUpdatedDate() {
         Course course = courseRepository.getLatestUpdatedDate();
         return course;
+    }
+
+    public void deleteCourseById(Integer courseId) {
+        Course course = courseRepository.getCourseById(courseId);
+        course.setIsActive(false);
+        courseRepository.save(course);
     }
 }

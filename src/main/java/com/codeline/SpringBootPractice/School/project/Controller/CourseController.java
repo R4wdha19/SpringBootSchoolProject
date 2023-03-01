@@ -68,4 +68,9 @@ CourseService courseService;
         Course course = courseService.getLatestUpdatedDate();
         return course;
     }
+
+    @RequestMapping(value = "deleteCourseById")
+    public void deleteCourseById(@RequestParam Integer courseId) {
+        courseService.deleteCourseById(courseId);
+    }
 }
