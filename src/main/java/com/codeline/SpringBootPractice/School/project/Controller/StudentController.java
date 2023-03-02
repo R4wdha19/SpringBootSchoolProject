@@ -81,4 +81,9 @@ StudentService studentService;
         studentService.deleteStudentByName(studentName);
     }
 
+    @RequestMapping(value = "createStudent", method = RequestMethod.GET)
+    public void createStudent(@RequestParam String studentName, Integer rollNumber,Integer schoolId) {
+        studentService.createStudent(studentName,rollNumber,schoolId);
+    }
+
 }

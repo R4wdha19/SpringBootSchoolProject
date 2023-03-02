@@ -5,6 +5,7 @@ import com.codeline.SpringBootPractice.School.project.Repository.StudentReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -73,6 +74,15 @@ public class StudentService {
     public void deleteStudentByName(String studentName) {
         Student student = studentRepository.getStudentByStudentName(studentName);
         student.setIsActive(false);
+        studentRepository.save(student);
+    }
+    public void createStudent(String studentName,Integer rollNumber,Integer schoolId) {
+        Student student = new Student();
+        student.setStudentName(studentName);
+        student.setStudentRollNumber(rollNumber);
+        student.setSchool(schoolService.getSchoolById(schoolId));
+        student.setCreatedDate(new Date());
+        student.setIsActive(Boolean.TRUE);
         studentRepository.save(student);
     }
 }
