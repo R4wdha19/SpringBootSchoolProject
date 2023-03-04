@@ -83,6 +83,9 @@ MarkService markService;
     public void deleteMarkByGrade(@RequestParam String markGrade) {
         markService.deleteMarkByGrade(markGrade);
     }
-
+    @RequestMapping(value = "createMark",method = RequestMethod.GET)
+    public void createMark(@RequestParam String grade ,Integer obtainedMark,Integer courseId){
+        markService.createMark(grade,obtainedMark,courseId);
+    }
 }
 

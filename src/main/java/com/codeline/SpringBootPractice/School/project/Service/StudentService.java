@@ -1,4 +1,5 @@
 package com.codeline.SpringBootPractice.School.project.Service;
+
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.StudentRepository;
@@ -17,37 +18,39 @@ public class StudentService {
     @Autowired
     SchoolService schoolService;
 
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         return studentRepository.getAllStudents();
     }
-    public Student getStudentById(Integer id){
-        Student student=studentRepository.getStudentById(id);
+
+    public Student getStudentById(Integer id) {
+        Student student = studentRepository.getStudentById(id);
         return student;
     }
 
 
-
-    public List<Student> getStudentsBySchoolName(String schoolName){
+    public List<Student> getStudentsBySchoolName(String schoolName) {
         School school = schoolService.getSchoolByName(schoolName);
         Integer schoolId = school.getId();
-        List<Student> students=studentRepository.getStudentBySchoolId(schoolId);
+        List<Student> students = studentRepository.getStudentBySchoolId(schoolId);
         return students;
     }
 
-    public Student getStudentByStudentName(String studentName){
-       Student student = studentRepository.getStudentByStudentName(studentName);
+    public Student getStudentByStudentName(String studentName) {
+        Student student = studentRepository.getStudentByStudentName(studentName);
         return student;
     }
-    public List<Student> getAllActiveStudents(){
+
+    public List<Student> getAllActiveStudents() {
         List<Student> allActiveStudents = studentRepository.getAllActiveStudents();
         return allActiveStudents;
     }
 
-    public List<Student> getAllInActiveStudents(){
+    public List<Student> getAllInActiveStudents() {
         List<Student> allInActiveStudents = studentRepository.getAllInActiveStudents();
         return allInActiveStudents;
     }
-    public List<Student> getStudentCreatedAfterDate(){
+
+    public List<Student> getStudentCreatedAfterDate() {
         List<Student> studentCreatedAfterDate = studentRepository.getStudentCreatedAfterDate();
         return studentCreatedAfterDate;
     }
@@ -67,6 +70,7 @@ public class StudentService {
         student.setIsActive(false);
         studentRepository.save(student);
     }
+
     public void deleteAllStudents() {
         studentRepository.deleteAllStudents();
     }
@@ -76,7 +80,8 @@ public class StudentService {
         student.setIsActive(false);
         studentRepository.save(student);
     }
-    public void createStudent(String studentName,Integer rollNumber,Integer schoolId) {
+
+    public void createStudent(String studentName, Integer rollNumber, Integer schoolId) {
         Student student = new Student();
         student.setStudentName(studentName);
         student.setStudentRollNumber(rollNumber);
