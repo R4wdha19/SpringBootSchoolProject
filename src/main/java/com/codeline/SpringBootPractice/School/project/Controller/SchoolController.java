@@ -114,4 +114,9 @@ public class SchoolController {
         List<School> schools = schoolService.getSchoolsByUpdatedDate(updatedDate);
         return schools;
     }
+
+    @RequestMapping(value = "updateSchool",method = RequestMethod.POST)
+    public void updateSchool(@RequestParam Integer schoolId,String schoolName,Boolean isActive){
+        schoolService.updateSchool(schoolId,schoolName,isActive);
+    }
 }

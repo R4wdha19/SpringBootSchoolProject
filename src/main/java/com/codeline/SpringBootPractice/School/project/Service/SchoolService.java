@@ -112,4 +112,11 @@ public class SchoolService {
         schools.stream().forEach(x -> x.setIsActive(false));
         schoolRepository.saveAll(schools);
     }
+    public void updateSchool(Integer schoolId,String schoolName,Boolean isActive){
+        School school =schoolRepository.getSchoolById(schoolId);
+        school.setSchoolName(schoolName);
+        school.setCreatedDate(new Date());
+        school.setIsActive(isActive);
+        schoolRepository.save(school);
+    }
 }
