@@ -1,7 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Repository;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
-import com.codeline.SpringBootPractice.School.project.Model.School;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -32,8 +32,8 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "select c from Course c where c.isActive = 0")
     List<Course> getAllInActiveCourses();
 
-    @Query(value = "select c from Course c where c.createdDate >= '2022-02-25'")
-    List<Course> getCourseCreatedAfterDate();
+    @Query(value = "select c from Course c where c.createdDate >=  :createdDate")
+    List<Course> getCourseCreatedAfterDate(@Param("createdDate") Date createdDate);
 
     @Query(value = "select c from Course c where c.id = (select Max(c.id) from Course c )")
     Course getLatestRow();
@@ -45,7 +45,10 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Transactional
     @Query(value = "update Course c Set c.isActive = false")
     void deleteAllCourses();
+    /*getCourseByCreatedDate*/
+    @Query(value = "select * from course where created_date like CONCAT (?1, '%') ", nativeQuery = true)
+    List<Course> getCourseByCreatedDate(String createdDate);
 
-/*    @Query(value = " select c from Course c where c.courseName = :courseName")
-    List<Mark> getMarksByCourseName(@Param("courseName")String courseName);*/
+    @Query(value = "select * from course where updated_date like CONCAT (?1, '%') ", nativeQuery = true)
+    List<Course> getCourseByUpdatedDate(String updatedDate);
 }

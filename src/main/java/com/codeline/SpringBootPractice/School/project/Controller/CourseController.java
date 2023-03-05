@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,9 +53,9 @@ public class CourseController {
     }
 
     @RequestMapping(value = "getCourseCreatedAfterDate", method = RequestMethod.GET)
-    public List<Course> getCourseCreatedAfterDate() {
+    public List<Course> getCourseCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
         List<Course> courseList = new ArrayList<>();
-        courseList = courseService.getCourseCreatedAfterDate();
+        courseList = courseService.getCourseCreatedAfterDate(createdDate);
         return courseList;
     }
 
@@ -88,5 +89,17 @@ public class CourseController {
     @RequestMapping(value = "createCourse", method = RequestMethod.POST)
     public void createCourse(@RequestParam String courseName, Integer studentId) {
         courseService.createCourse(courseName, studentId);
+    }
+    @RequestMapping(value = "getCourseByCreatedDate", method = RequestMethod.GET)
+    public List<Course> getCourseByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        List<Course> course = courseService.getCourseByCreatedDate(createdDate);
+        return course;
+
+    }
+    @RequestMapping(value = "getCourseByUpdatedDate", method = RequestMethod.GET)
+    public List<Course> getCourseByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<Course> course = courseService.getCourseByUpdatedDate(updatedDate);
+        return course;
+
     }
 }
