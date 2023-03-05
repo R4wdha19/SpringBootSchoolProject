@@ -34,7 +34,7 @@ public class CourseController {
 
     @RequestMapping(value = "getByName", method = RequestMethod.GET)
     public List<Course> getCourseByName(@RequestParam String courseName) {
-        List<Course> course = courseService.getCourseByName(courseName);
+        List<Course> course = courseService.getCoursesByName(courseName);
         return course;
     }
 
@@ -55,7 +55,7 @@ public class CourseController {
     @RequestMapping(value = "getCourseCreatedAfterDate", method = RequestMethod.GET)
     public List<Course> getCourseCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
         List<Course> courseList = new ArrayList<>();
-        courseList = courseService.getCourseCreatedAfterDate(createdDate);
+        courseList = courseService.getCoursesCreatedAfterDate(createdDate);
         return courseList;
     }
 
@@ -83,23 +83,46 @@ public class CourseController {
 
     @RequestMapping(value = "deleteCourseByName", method = RequestMethod.POST)
     public void deleteCourseByName(@RequestParam String courseName) {
-        courseService.deleteCourseByName(courseName);
+        courseService.deleteCoursesByName(courseName);
     }
 
     @RequestMapping(value = "createCourse", method = RequestMethod.POST)
     public void createCourse(@RequestParam String courseName, Integer studentId) {
         courseService.createCourse(courseName, studentId);
     }
+
     @RequestMapping(value = "getCourseByCreatedDate", method = RequestMethod.GET)
     public List<Course> getCourseByCreatedDate(@RequestParam String createdDate) throws ParseException {
-        List<Course> course = courseService.getCourseByCreatedDate(createdDate);
+        List<Course> course = courseService.getCoursesByCreatedDate(createdDate);
         return course;
 
     }
+
     @RequestMapping(value = "getCourseByUpdatedDate", method = RequestMethod.GET)
     public List<Course> getCourseByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
-        List<Course> course = courseService.getCourseByUpdatedDate(updatedDate);
+        List<Course> course = courseService.getCoursesByUpdatedDate(updatedDate);
         return course;
 
     }
+
+    @RequestMapping(value = "getCourseByStudentId", method = RequestMethod.GET)
+    public List<Course> getCourseByStudentId(@RequestParam Integer studentId) {
+        List<Course> coursesOfAStudent = courseService.getCoursesByStudentId(studentId);
+        return coursesOfAStudent;
+    }
+    @RequestMapping(value = "getAllActiveCoursesForAStudent", method = RequestMethod.GET)
+    public List<Course> getAllActiveCoursesForAStudent(@RequestParam Integer studentId) {
+        List<Course> AllActiveCoursesForAStudent = courseService.getCoursesByStudentId(studentId);
+        return AllActiveCoursesForAStudent;
+    }
+    @RequestMapping(value = "deleteCoursesByCreatedDate", method = RequestMethod.POST)
+    public void deleteCoursesByCreatedDate(@RequestParam String createdDate){
+        courseService.deleteCoursesByCreatedDate(createdDate);
+    }
+    @RequestMapping(value = "deleteCoursesByUpdatedDate", method = RequestMethod.POST)
+    public void deleteCoursesByUpdatedDate(@RequestParam String updatedDate){
+        courseService.deleteCoursesByUpdatedDate(updatedDate);
+    }
+
+
 }

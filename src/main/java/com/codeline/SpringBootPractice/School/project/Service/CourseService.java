@@ -1,7 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
-import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class CourseService {
         return course;
     }
 
-    public List<Course> getCourseByName(String courseName) {
+    public List<Course> getCoursesByName(String courseName) {
         List<Course> course = courseRepository.getCourseByName(courseName);
         return course;
     }
@@ -54,7 +53,7 @@ public class CourseService {
         return allInActiveCourses;
     }
 
-    public List<Course> getCourseCreatedAfterDate(String createdDate) throws ParseException {
+    public List<Course> getCoursesCreatedAfterDate(String createdDate) throws ParseException {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         Date usableDate = dateFormatter.parse(createdDate);
         List<Course> courses = courseRepository.getCourseCreatedAfterDate(usableDate);
@@ -81,7 +80,7 @@ public class CourseService {
         courseRepository.deleteAllCourses();
     }
 
-    public void deleteCourseByName(String courseName) {
+    public void deleteCoursesByName(String courseName) {
         List<Course> course = courseRepository.getCourseByName(courseName);
         course.stream().forEach(x -> x.setIsActive(false));
         courseRepository.saveAll(course);
@@ -95,15 +94,34 @@ public class CourseService {
         course.setCreatedDate(new Date());
         courseRepository.save(course);
     }
-    public List<Course> getCourseByCreatedDate(String createdDate) throws ParseException {
-//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//        Date usableDate = dateFormatter.parse(createdDate);
+    public List<Course> getCoursesByCreatedDate(String createdDate) throws ParseException {
         List<Course> course = courseRepository.getCourseByCreatedDate(createdDate);
         return course;
     }
 
-    public List<Course> getCourseByUpdatedDate(String updatedDate) throws ParseException {
+    public List<Course> getCoursesByUpdatedDate(String updatedDate) throws ParseException {
         List<Course> course = courseRepository.getCourseByUpdatedDate(updatedDate);
         return course;
     }
+    public List<Course> getCoursesByStudentId(Integer studentId) {
+        List<Course> coursesOfAStudent = courseRepository.getCoursesByStudentId(studentId);
+        return coursesOfAStudent;
+    }
+    public List<Course> getAllActiveCoursesForAStudent(Integer studentId) {
+        List<Course> allActiveCoursesForAStudent = courseRepository.getAllActiveCoursesForAStudent(studentId);
+        return allActiveCoursesForAStudent;
+    }
+
+    public void deleteCoursesByCreatedDate(String createdDate) {
+        List<Course> course = courseRepository.getCourseByCreatedDate(createdDate);
+        course.stream().forEach(x -> x.setIsActive(false));
+        courseRepository.saveAll(course);
+    }
+    public void deleteCoursesByUpdatedDate(String updatedDate) {
+        List<Course> course = courseRepository.getCourseByUpdatedDate(updatedDate);
+        course.stream().forEach(x -> x.setIsActive(false));
+        courseRepository.saveAll(course);
+    }
+
+
 }

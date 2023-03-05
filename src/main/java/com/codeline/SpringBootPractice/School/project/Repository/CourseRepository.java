@@ -51,4 +51,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     @Query(value = "select * from course where updated_date like CONCAT (?1, '%') ", nativeQuery = true)
     List<Course> getCourseByUpdatedDate(String updatedDate);
+    @Query(value = "select c from Course c where c.student.id = :studentId and (c.isActive=1)")
+    List<Course> getAllActiveCoursesForAStudent(Integer studentId);
+
 }
