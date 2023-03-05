@@ -2,12 +2,12 @@ package com.codeline.SpringBootPractice.School.project.Service;
 
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
+import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
 import com.codeline.SpringBootPractice.School.project.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -17,6 +17,9 @@ public class StudentService {
 
     @Autowired
     SchoolService schoolService;
+
+    @Autowired
+    SchoolRepository schoolRepository;
 
     public List<Student> getAllStudents() {
         return studentRepository.getAllStudents();
@@ -90,4 +93,25 @@ public class StudentService {
         student.setIsActive(Boolean.TRUE);
         studentRepository.save(student);
     }
+
+    public List<Student> getStudentsBySchoolId(Integer schoolId) {
+        List<Student> students = studentRepository.getStudentBySchoolId(schoolId);
+        return students;
+    }
+
+    public void getSchoolByNumberOfStudents(Integer numberOfStudents) {
+        List<Student> students = studentRepository.getAllStudents();
+        List<School> schools = new ArrayList<>();
+        Set<Integer> schoolIds = new HashSet<>();
+        List<Integer> schoolIdList = new ArrayList<>();
+        for (Student s: students) {
+            schools.add(s.getSchool());
+            schoolIds.add(s.getSchool().getId());
+            schoolIdList.add(s.getSchool().getId());
+        }
+
+
+
+    }
+
 }

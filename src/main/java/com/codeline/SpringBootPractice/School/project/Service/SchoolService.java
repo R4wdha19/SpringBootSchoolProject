@@ -2,6 +2,7 @@ package com.codeline.SpringBootPractice.School.project.Service;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.School;
+import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -119,4 +120,17 @@ public class SchoolService {
         school.setIsActive(isActive);
         schoolRepository.save(school);
     }
+    public void deleteAllSchoolsCreatedAfterDate(String createdDate) throws ParseException {
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Date formatedDate=dateFormat.parse(createdDate);
+        List<School> schoolList=schoolRepository.getSchoolCreatedAfterDate(formatedDate);
+        schoolList.stream().forEach(r->r.setIsActive(false));
+        schoolRepository.saveAll(schoolList);
+
+    }
+
+    public School getSchoolByNumberOfStudents(Integer numberOfStudents){
+
+    }
+
 }
