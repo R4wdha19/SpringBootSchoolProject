@@ -1,12 +1,12 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
-import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,26 +34,27 @@ public class CourseService {
     }
 
     public List<Course> getCoursesByStudentName(String studentName) {
-        Student student= studentService.getStudentByStudentName(studentName);
+        Student student = studentService.getStudentByStudentName(studentName);
         Integer studentId = student.getId();
         List<Course> courseList = courseRepository.getCoursesByStudentId(studentId);
         return courseList;
     }
 
-    public List<Course> getAllActiveCourses(){
+    public List<Course> getAllActiveCourses() {
         List<Course> allActiveCourses = courseRepository.getAllActiveCourses();
         return allActiveCourses;
     }
 
-    public List<Course> getAllInActiveCourses(){
+    public List<Course> getAllInActiveCourses() {
         List<Course> allInActiveCourses = courseRepository.getAllInActiveCourses();
         return allInActiveCourses;
     }
 
-    public List<Course> getCourseCreatedAfterDate(){
+    public List<Course> getCourseCreatedAfterDate() {
         List<Course> courses = courseRepository.getCourseCreatedAfterDate();
         return courses;
     }
+
     public Course getLatestRow() {
         Course course = courseRepository.getLatestRow();
         return course;
@@ -75,8 +76,17 @@ public class CourseService {
     }
 
     public void deleteCourseByName(String courseName) {
-       List <Course> course = courseRepository.getCourseByName(courseName);
-        course.stream().forEach(x->x.setIsActive(false));
+        List<Course> course = courseRepository.getCourseByName(courseName);
+        course.stream().forEach(x -> x.setIsActive(false));
         courseRepository.saveAll(course);
+    }
+
+    public void createCourse(String courseName, Integer studentId) {
+        Course course = new Course();
+        course.setCourseName(courseName);
+        course.setStudent(studentService.getStudentById(studentId));
+        course.setIsActive(true);
+        course.setCreatedDate(new Date());
+        courseRepository.save(course);
     }
 }

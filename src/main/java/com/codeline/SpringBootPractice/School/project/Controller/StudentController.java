@@ -18,21 +18,21 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    @RequestMapping(value = "getAll", method = RequestMethod.GET)
     public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
         students = studentService.getAllStudents();
         return students;
     }
 
-    @RequestMapping(value = "/getById", method = RequestMethod.GET)
+    @RequestMapping(value = "getById", method = RequestMethod.GET)
     public Student getStudentById(@RequestParam Integer studentId) {
         Student student = studentService.getStudentById(studentId);
         return student;
 
     }
 
-    @RequestMapping(value = "/getByName")
+    @RequestMapping(value = "getByName", method = RequestMethod.GET)
     public Student getStudentByStudentName(@RequestParam String studentName) {
         Student student = studentService.getStudentByStudentName(studentName);
         return student;
@@ -71,22 +71,22 @@ public class StudentController {
         return student;
     }
 
-    @RequestMapping(value = "deleteStudentById")
+    @RequestMapping(value = "deleteStudentById", method = RequestMethod.POST)
     public void deleteStudentById(@RequestParam Integer studentId) {
         studentService.deleteStudentById(studentId);
     }
 
-    @RequestMapping(value = "deleteAll", method = RequestMethod.GET)
+    @RequestMapping(value = "deleteAll", method = RequestMethod.POST)
     public void deleteAllStudents() {
         studentService.deleteAllStudents();
     }
 
-    @RequestMapping(value = "deleteStudentByName")
+    @RequestMapping(value = "deleteStudentByName", method = RequestMethod.POST)
     public void deleteStudentByName(@RequestParam String studentName) {
         studentService.deleteStudentByName(studentName);
     }
 
-    @RequestMapping(value = "createStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "createStudent", method = RequestMethod.POST)
     public void createStudent(@RequestParam String studentName, Integer rollNumber, Integer schoolId) {
         studentService.createStudent(studentName, rollNumber, schoolId);
     }

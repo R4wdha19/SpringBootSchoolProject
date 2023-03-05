@@ -63,7 +63,7 @@ public class SchoolController {
         schoolService.updateCreatedDateByUserInput(data.getDate(), data.getId());
     }
 
-    @RequestMapping(value = "createSchool", method = RequestMethod.GET)
+    @RequestMapping(value = "createSchool", method = RequestMethod.POST)
     public void createSchool(@RequestParam String schoolName) {
         schoolService.createSchool(schoolName);
     }
@@ -80,17 +80,17 @@ public class SchoolController {
         return school;
     }
 
-    @RequestMapping(value = "deleteSchoolById")
+    @RequestMapping(value = "deleteSchoolById", method = RequestMethod.POST)
     public void deleteSchoolById(@RequestParam Integer schoolId) {
         schoolService.deleteSchoolById(schoolId);
     }
 
-    @RequestMapping(value = "deleteAll", method = RequestMethod.GET)
+    @RequestMapping(value = "deleteAll", method = RequestMethod.POST)
     public void deleteAllSchools() {
         schoolService.deleteAllSchool();
     }
 
-    @RequestMapping(value = "deleteSchoolByName")
+    @RequestMapping(value = "deleteSchoolByName", method = RequestMethod.POST)
     public void deleteSchoolByName(@RequestParam String schoolName) {
         schoolService.deleteSchoolByName(schoolName);
     }
