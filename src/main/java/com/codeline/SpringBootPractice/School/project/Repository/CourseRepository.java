@@ -32,7 +32,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "select c from Course c where c.isActive = 0")
     List<Course> getAllInActiveCourses();
 
-    @Query(value = "select c from Course c where c.createdDate >=  :createdDate")
+    @Query(value = "select c from Course c where c.createdDate > :createdDate")
     List<Course> getCourseCreatedAfterDate(@Param("createdDate") Date createdDate);
 
     @Query(value = "select c from Course c where c.id = (select Max(c.id) from Course c )")

@@ -31,7 +31,7 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = "select s from School s where s.isActive = 0")
     List<School> getAllInActiveSchools();
 
-    @Query(value = "select  s from School s where s.createdDate >= :createdDate")
+    @Query(value = "select  s from School s where s.createdDate > :createdDate")
     List<School> getSchoolCreatedAfterDate(@Param("createdDate") Date createdDate);
 
     @Query(value = "select s from School s where s.id = (select Max(s.id) from School s )")
@@ -45,7 +45,11 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = "Update School s Set s.isActive =false")
     void deleteAllSchoolsByIsActiveFalse();
 
+    @Query(value = "select * from school where created_date like CONCAT (?1, '%') ", nativeQuery = true)
+    List<School> getSchoolsByCreatedDate(String createdDate);
 
+    @Query(value = "select * from school where updated_date like CONCAT (?1, '%') ", nativeQuery = true)
+    List<School> getSchoolsByUpdatedDate(String updatedDate);
 
 }
 

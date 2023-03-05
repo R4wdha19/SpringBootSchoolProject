@@ -1,5 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Controller;
 
+import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.RequestObjects.SchoolRequestForCreateDateUpdate;
 import com.codeline.SpringBootPractice.School.project.Service.SchoolService;
@@ -95,5 +96,22 @@ public class SchoolController {
         schoolService.deleteSchoolByName(schoolName);
     }
 
-    
+    @RequestMapping(value = "deleteSchoolsByCreatedDate", method = RequestMethod.POST)
+    public void deleteSchoolsByCreatedDate(@RequestParam String createdDate){
+        schoolService.deleteCoursesByCreatedDate(createdDate);
+    }
+    @RequestMapping(value = "deleteSchoolsByUpdatedDate", method = RequestMethod.POST)
+    public void deleteSchoolsByUpdatedDate(@RequestParam String updatedDate){
+        schoolService.deleteCoursesByUpdatedDate(updatedDate);
+    }
+    @RequestMapping(value = "getSchoolsByCreatedDate", method = RequestMethod.GET)
+    public List<School> getSchoolsByCreatedDate(String createdDate) throws ParseException {
+        List<School> schools = schoolService.getSchoolsByCreatedDate(createdDate);
+        return schools;
+    }
+    @RequestMapping(value = "getSchoolsByUpdatedDate", method = RequestMethod.GET)
+    public List<School> getSchoolsByUpdatedDate(String updatedDate) throws ParseException {
+        List<School> schools = schoolService.getSchoolsByUpdatedDate(updatedDate);
+        return schools;
+    }
 }

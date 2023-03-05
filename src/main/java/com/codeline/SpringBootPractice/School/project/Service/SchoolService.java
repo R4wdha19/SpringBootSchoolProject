@@ -1,5 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
+import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,8 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class SchoolService {
@@ -88,5 +90,26 @@ public class SchoolService {
         School school = schoolRepository.getSchoolByName(schoolName);
         school.setIsActive(false);
         schoolRepository.save(school);
+    }
+
+    public  List<School> getSchoolsByCreatedDate(String createdDate){
+        List<School> schools=schoolRepository.getSchoolsByCreatedDate(createdDate);
+        return schools;
+    }
+
+    public  List<School> getSchoolsByUpdatedDate(String updatedDate){
+        List<School> schools=schoolRepository.getSchoolsByUpdatedDate(updatedDate);
+        return schools;
+    }
+
+    public void deleteCoursesByCreatedDate(String createdDate) {
+        List<School> schoolList = schoolRepository.getSchoolsByCreatedDate(createdDate);
+        schoolList.stream().forEach(x -> x.setIsActive(false));
+        schoolRepository.saveAll(schoolList);
+    }
+    public void deleteCoursesByUpdatedDate(String updatedDate) {
+        List<School> schools = schoolRepository.getSchoolsByUpdatedDate(updatedDate);
+        schools.stream().forEach(x -> x.setIsActive(false));
+        schoolRepository.saveAll(schools);
     }
 }
