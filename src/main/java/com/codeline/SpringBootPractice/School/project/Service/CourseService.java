@@ -5,6 +5,7 @@ import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -121,6 +122,21 @@ public class CourseService {
         List<Course> course = courseRepository.getCourseByUpdatedDate(updatedDate);
         course.stream().forEach(x -> x.setIsActive(false));
         courseRepository.saveAll(course);
+    }
+    public void deleteAllCoursesCreatedAfterDate(String createdDate) throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date usableDate = dateFormatter.parse(createdDate);
+        List<Course> course = courseRepository.deleteAllCoursesCreatedAfterDate(usableDate);
+        course.stream().forEach(x -> x.setIsActive(false));
+        courseRepository.saveAll(course);
+    }
+    public void updateCourse(Integer courseId,String courseName, Integer studentId, Boolean isActive){
+     Course course =courseRepository.getCourseById(courseId);
+        course.setCourseName(courseName);
+        course.setCreatedDate(new Date());
+        course.setIsActive(isActive);
+        course.setStudent(studentService.getStudentById(studentId));
+        courseRepository.save(course);
     }
 
 

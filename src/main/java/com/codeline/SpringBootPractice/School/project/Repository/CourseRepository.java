@@ -53,5 +53,9 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     List<Course> getCourseByUpdatedDate(String updatedDate);
     @Query(value = "select c from Course c where c.student.id = :studentId and (c.isActive=1)")
     List<Course> getAllActiveCoursesForAStudent(Integer studentId);
+    @Query(value = "select c from Course c where c.createdDate >=  :createdDate")
+    List<Course> deleteAllCoursesCreatedAfterDate(Date createdDate);
+
+
 
 }

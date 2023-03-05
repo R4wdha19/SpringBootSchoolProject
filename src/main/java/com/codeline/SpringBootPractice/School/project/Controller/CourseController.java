@@ -123,6 +123,19 @@ public class CourseController {
     public void deleteCoursesByUpdatedDate(@RequestParam String updatedDate){
         courseService.deleteCoursesByUpdatedDate(updatedDate);
     }
+    @RequestMapping(value = "deleteAllCoursesCreatedAfterDate", method = RequestMethod.POST)
+    public String deleteAllCoursesCreatedAfterDate(@RequestParam String createdDate)  {
+        try {
+            courseService.deleteAllCoursesCreatedAfterDate(createdDate);
+        } catch (ParseException e) {
+            return "Failed";
+        }
+        return "Success";
+    }
+@RequestMapping(value = "updateCourse",method = RequestMethod.POST)
+    public void updateCourse(@RequestParam Integer courseId,String courseName,Integer studentId,Boolean isActive){
+       courseService.updateCourse(courseId,courseName,studentId,isActive);
+    }
 
 
 }
