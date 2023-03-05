@@ -5,7 +5,6 @@ import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DateFormat;
 import java.text.ParseException;

@@ -41,8 +41,10 @@ public class SchoolService {
         return allInActiveSchools;
     }
 
-    public List<School> getSchoolCreatedAfterDate() {
-        List<School> schools = schoolRepository.getSchoolCreatedAfterDate();
+    public List<School> getSchoolCreatedAfterDate(String createdDate) throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date usableDate = dateFormatter.parse(createdDate);
+        List<School> schools = schoolRepository.getSchoolCreatedAfterDate(usableDate);
         return schools;
 
     }

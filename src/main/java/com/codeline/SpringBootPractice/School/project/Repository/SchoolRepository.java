@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -30,8 +31,8 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = "select s from School s where s.isActive = 0")
     List<School> getAllInActiveSchools();
 
-    @Query(value = "select  s from School s where s.createdDate >= '2022-02-25'")
-    List<School> getSchoolCreatedAfterDate();
+    @Query(value = "select  s from School s where s.createdDate >= :createdDate")
+    List<School> getSchoolCreatedAfterDate(@Param("createdDate") Date createdDate);
 
     @Query(value = "select s from School s where s.id = (select Max(s.id) from School s )")
     School getLatestRow();
