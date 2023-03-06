@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -28,8 +29,11 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
     @Query(value = "select m from Mark m where m.isActive = 0")
     List<Mark> getAllInActiveMarks();
 
+    @Query(value = "select * from Mark where created_date like CONCAT (?1, '%') ", nativeQuery = true)
+    List<Mark> getMarkByCreatedDate(@Param("createdDate") String createdDate);
+
     @Query(value = "select m from Mark m where m.createdDate >= :createdDate")
-    List<Mark> getMarkCreatedAfterDate(@Param("createdDate") String createdDate);
+    List<Mark> getMarkCreatedAfterDate(@Param("createdDate") Date createdDate);
 
     @Query(value = "select m from Mark m where m.id = (select Max(m.id) from Mark m)")
     Mark getLatestRow();
@@ -37,12 +41,22 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
     @Query(value = " select m from Mark m where m.updatedDate = (select Max(m.updatedDate) from Mark m)")
     Mark getLatestUpdatedDate();
 
+
+    @Query(value = "select m from Mark m where m.obtainedMarks > :obtainedMarks")
+    List<Mark> getByObtainedMarksMoreThan(@Param("obtainedMarks") Integer obtainedMarks);
+
+    @Query(value = "select m from Mark m where m.obtainedMarks < :obtainedMarks")
+    List<Mark> getByObtainedMarksLessThan(@Param("obtainedMarks") Integer obtainedMarks);
+
+    @Query(value = "select * from Mark where updated_date like CONCAT (?1, '%') ", nativeQuery = true)
+    List<Mark> getMarksByUpdatedDate(@Param("updatedDate") String updatedDate);
+
+    @Query("select m from Mark m where m.course.id = :courseId")
+    List<Mark> getMarksByCourseId(@Param("courseId") Integer courseId);
+
     @Modifying
     @Transactional
     @Query(value = "update Mark m Set m.isActive = false")
     void deleteAllMarks();
-    @Query(value = "select m from Mark m where m.obtainedMarks > :obtainedMarks")
-    List<Mark> getByObtainedMarksMoreThan(Integer obtainedMarks);
-    @Query(value = "select m from Mark m where m.obtainedMarks < :obtainedMarks")
-    List<Mark> getByObtainedMarksLessThan(Integer obtainedMarks);
+
 }

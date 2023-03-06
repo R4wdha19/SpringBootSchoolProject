@@ -1,8 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
-import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.School;
-import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,44 +85,47 @@ public class SchoolService {
     public void deleteAllSchool() {
         schoolRepository.deleteAllSchoolsByIsActiveFalse();
     }
+
     public void deleteSchoolByName(String schoolName) {
         School school = schoolRepository.getSchoolByName(schoolName);
         school.setIsActive(false);
         schoolRepository.save(school);
     }
 
-    public  List<School> getSchoolsByCreatedDate(String createdDate){
-        List<School> schools=schoolRepository.getSchoolsByCreatedDate(createdDate);
+    public List<School> getSchoolsByCreatedDate(String createdDate) {
+        List<School> schools = schoolRepository.getSchoolsByCreatedDate(createdDate);
         return schools;
     }
 
-    public  List<School> getSchoolsByUpdatedDate(String updatedDate){
-        List<School> schools=schoolRepository.getSchoolsByUpdatedDate(updatedDate);
+    public List<School> getSchoolsByUpdatedDate(String updatedDate) {
+        List<School> schools = schoolRepository.getSchoolsByUpdatedDate(updatedDate);
         return schools;
     }
 
-    public void deleteCoursesByCreatedDate(String createdDate) {
+    public void deleteSchoolsByCreatedDate(String createdDate) {
         List<School> schoolList = schoolRepository.getSchoolsByCreatedDate(createdDate);
         schoolList.stream().forEach(x -> x.setIsActive(false));
         schoolRepository.saveAll(schoolList);
     }
-    public void deleteCoursesByUpdatedDate(String updatedDate) {
+
+    public void deleteSchoolsByUpdatedDate(String updatedDate) {
         List<School> schools = schoolRepository.getSchoolsByUpdatedDate(updatedDate);
         schools.stream().forEach(x -> x.setIsActive(false));
         schoolRepository.saveAll(schools);
     }
-    public void updateSchool(Integer schoolId,String schoolName,Boolean isActive){
-        School school =schoolRepository.getSchoolById(schoolId);
+
+    public void updateSchool(Integer schoolId, String schoolName, Boolean isActive) {
+        School school = schoolRepository.getSchoolById(schoolId);
         school.setSchoolName(schoolName);
-        school.setCreatedDate(new Date());
         school.setIsActive(isActive);
         schoolRepository.save(school);
     }
+
     public void deleteAllSchoolsCreatedAfterDate(String createdDate) throws ParseException {
-        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Date formatedDate=dateFormat.parse(createdDate);
-        List<School> schoolList=schoolRepository.getSchoolCreatedAfterDate(formatedDate);
-        schoolList.stream().forEach(r->r.setIsActive(false));
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date formatedDate = dateFormat.parse(createdDate);
+        List<School> schoolList = schoolRepository.getSchoolCreatedAfterDate(formatedDate);
+        schoolList.stream().forEach(r -> r.setIsActive(false));
         schoolRepository.saveAll(schoolList);
 
     }

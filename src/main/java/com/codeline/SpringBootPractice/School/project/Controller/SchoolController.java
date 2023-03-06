@@ -1,6 +1,5 @@
 package com.codeline.SpringBootPractice.School.project.Controller;
 
-import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.RequestObjects.SchoolRequestForCreateDateUpdate;
 import com.codeline.SpringBootPractice.School.project.Service.SchoolService;
@@ -101,12 +100,12 @@ public class SchoolController {
 
     @RequestMapping(value = "deleteSchoolsByCreatedDate", method = RequestMethod.POST)
     public void deleteSchoolsByCreatedDate(@RequestParam String createdDate) {
-        schoolService.deleteCoursesByCreatedDate(createdDate);
+        schoolService.deleteSchoolsByCreatedDate(createdDate);
     }
 
     @RequestMapping(value = "deleteSchoolsByUpdatedDate", method = RequestMethod.POST)
     public void deleteSchoolsByUpdatedDate(@RequestParam String updatedDate) {
-        schoolService.deleteCoursesByUpdatedDate(updatedDate);
+        schoolService.deleteSchoolsByUpdatedDate(updatedDate);
     }
 
     @RequestMapping(value = "getSchoolsByCreatedDate", method = RequestMethod.GET)
