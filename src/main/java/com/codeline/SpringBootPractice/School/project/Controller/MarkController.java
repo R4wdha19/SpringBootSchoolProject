@@ -92,5 +92,16 @@ public class MarkController {
     public void createMark(@RequestParam String grade, Integer obtainedMark, Integer courseId) {
         markService.createMark(grade, obtainedMark, courseId);
     }
+    @RequestMapping(value = "getByObtainedMarksMoreThan", method = RequestMethod.GET)
+    public List<Mark> getByObtainedMarksMoreThan(@RequestParam Integer obtainedMarks){
+        List<Mark> markList=markService.getByObtainedMarksMoreThan(obtainedMarks);
+        return markList;
+    }
+
+    @RequestMapping(value = "getByObtainedMarksLessThan", method = RequestMethod.GET)
+    public List<Mark> getByObtainedMarksLessThan(@RequestParam Integer obtainedMarks){
+        List<Mark> markList=markService.getByObtainedMarksLessThan(obtainedMarks);
+        return markList;
+    }
 }
 

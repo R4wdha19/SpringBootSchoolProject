@@ -41,4 +41,8 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
     @Transactional
     @Query(value = "update Mark m Set m.isActive = false")
     void deleteAllMarks();
+    @Query(value = "select m from Mark m where m.obtainedMarks > :obtainedMarks")
+    List<Mark> getByObtainedMarksMoreThan(Integer obtainedMarks);
+    @Query(value = "select m from Mark m where m.obtainedMarks < :obtainedMarks")
+    List<Mark> getByObtainedMarksLessThan(Integer obtainedMarks);
 }

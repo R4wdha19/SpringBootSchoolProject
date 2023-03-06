@@ -48,8 +48,10 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Transactional
     @Query(value = "update Student st Set st.isActive = false")
     void deleteAllStudents();
+/*
     @Query(value = " select st from Student st where  ")
     Student getSchoolByNumberOfStudents(Integer numberOfStudents);
+*/
 
 
 }

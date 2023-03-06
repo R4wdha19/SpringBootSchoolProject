@@ -99,7 +99,7 @@ public class StudentService {
         return students;
     }
 
-    public void getSchoolByNumberOfStudents(Integer numberOfStudents) {
+/*    public void getSchoolByNumberOfStudents(Integer numberOfStudents) {
         List<Student> students = studentRepository.getAllStudents();
         List<School> schools = new ArrayList<>();
         Set<Integer> schoolIds = new HashSet<>();
@@ -112,6 +112,6 @@ public class StudentService {
 
 
 
-    }
+    }*/
 
 }

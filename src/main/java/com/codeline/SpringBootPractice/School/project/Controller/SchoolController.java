@@ -131,8 +131,8 @@ public class SchoolController {
         schoolService.deleteAllSchoolsCreatedAfterDate(createdDate);
     }
 
-    public School getSchoolByNumberOfStudents(@RequestParam Integer numberOFStudents, Integer schoolId) {
+ /*   public School getSchoolByNumberOfStudents(@RequestParam Integer numberOFStudents, Integer schoolId) {
         studentService.getStudentsBySchoolId(schoolId);
 
-    }
+    }*/
 }

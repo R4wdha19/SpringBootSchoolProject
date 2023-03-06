@@ -82,5 +82,13 @@ public class MarkService {
         mark.setIsActive(true);
         markRepository.save(mark);
     }
+    public List<Mark> getByObtainedMarksMoreThan(Integer obtainedMarks){
+        List<Mark> obtainedMarksList = markRepository.getByObtainedMarksMoreThan(obtainedMarks);
+        return obtainedMarksList;
+    }
+    public List<Mark> getByObtainedMarksLessThan(Integer obtainedMarks){
+        List<Mark> obtainedMarksList = markRepository.getByObtainedMarksLessThan(obtainedMarks);
+        return obtainedMarksList;
+    }
 
 }
