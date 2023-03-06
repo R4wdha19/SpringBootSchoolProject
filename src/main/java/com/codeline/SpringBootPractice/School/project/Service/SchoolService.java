@@ -1,21 +1,24 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
 import com.codeline.SpringBootPractice.School.project.Model.School;
+import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
+import com.codeline.SpringBootPractice.School.project.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SchoolService {
 
     @Autowired
     SchoolRepository schoolRepository;
+    @Autowired
+    StudentRepository studentRepository;
 
     public List<School> getAllSchools() {
 
@@ -130,8 +133,38 @@ public class SchoolService {
 
     }
 
-/*    public School getSchoolByNumberOfStudents(Integer numberOfStudents){
+/*    public void getSchoolByNumberOfStudents(Integer numberOfStudents) {
+        List<Student> students = studentRepository.getAllStudents();
+        List<School> schools = new ArrayList<>(); // to get the school ids
+        Set<Integer> schoolIds = new HashSet<>(); // so we will not have repeated ids
+        List<Integer> schoolIdList = new ArrayList<>(); // the school ids that we need to return
+        for (Student s : students) {   // forEach Loop that checks the school id for each student
+            schools.add(s.getSchool());
+            schoolIds.add(s.getSchool().getId());
+            schoolIdList.add(s.getSchool().getId());
+        }
 
     }*/
 
+
+    public List<School> getSchoolByNumberOfStudent(Integer numberOfStudent) {
+        List<Integer> typesOfSchoolIdsInStudent = studentRepository.getDistinctSchoolIdsFromStudent();
+
+        Integer schoolIdThatUserWants = 0;
+        List<Integer> schoolIdsThatUserWants = new ArrayList<>();
+
+        for (Integer idOfSchool : typesOfSchoolIdsInStudent) {
+            Integer count = studentRepository.getCountOfStudentsBySchoolId(idOfSchool);
+
+            if (numberOfStudent == count) {
+                schoolIdsThatUserWants.add(idOfSchool);
+            }
+        }
+
+        List<School> schoolThatUserWasLookingFor = schoolRepository.findAllById(schoolIdsThatUserWants);
+        return schoolThatUserWasLookingFor;
+    }
 }
+
+
+

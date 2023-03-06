@@ -20,3 +20,9 @@
 
 	   update mark set course_id = 3 where course_id is null;
 	   select MAX (updated_date) from mark
+
+	   --get school by number of students 
+	   select distinct school_id from student
+	    select * from student
+
+		select count(school_id) from students

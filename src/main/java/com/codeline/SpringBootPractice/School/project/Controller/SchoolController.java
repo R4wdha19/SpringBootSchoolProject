@@ -130,8 +130,9 @@ public class SchoolController {
         schoolService.deleteAllSchoolsCreatedAfterDate(createdDate);
     }
 
- /*   public School getSchoolByNumberOfStudents(@RequestParam Integer numberOFStudents, Integer schoolId) {
-        studentService.getStudentsBySchoolId(schoolId);
-
-    }*/
+    @RequestMapping(value = "getSchoolByNumberOfStudents", method = RequestMethod.GET)
+    public List<School> getSchoolByNumberOfStudents(@RequestParam Integer numberOFStudents) {
+        List<School> schoolList = schoolService.getSchoolByNumberOfStudent(numberOFStudents);
+        return schoolList;
+    }
 }

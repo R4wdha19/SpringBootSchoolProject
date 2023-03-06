@@ -7,9 +7,7 @@ import com.codeline.SpringBootPractice.School.project.Repository.StudentReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -103,19 +101,6 @@ public class StudentService {
     }
 
 
-    public void getSchoolByNumberOfStudents(Integer numberOfStudents) {
-        List<Student> students = studentRepository.getAllStudents();
-        List<School> schools = new ArrayList<>();
-        Set<Integer> schoolIds = new HashSet<>();
-        List<Integer> schoolIdList = new ArrayList<>();
-        for (Student s: students) {
-            schools.add(s.getSchool());
-            schoolIds.add(s.getSchool().getId());
-            schoolIdList.add(s.getSchool().getId());
-        }
 
-
-
-    }
 
 }
