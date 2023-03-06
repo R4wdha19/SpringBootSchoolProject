@@ -7,7 +7,9 @@ import com.codeline.SpringBootPractice.School.project.Repository.StudentReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -21,13 +23,13 @@ public class StudentService {
     @Autowired
     SchoolRepository schoolRepository;
 
-    public List<Student> getAllStudents() {
-        return studentRepository.getAllStudents();
-    }
-
     public Student getStudentById(Integer id) {
         Student student = studentRepository.getStudentById(id);
         return student;
+    }
+
+    public List<Student> getAllStudents() {
+        return studentRepository.getAllStudents();
     }
 
 
@@ -68,6 +70,12 @@ public class StudentService {
         return student;
     }
 
+    public List<Student> getStudentsBySchoolId(Integer schoolId) {
+        List<Student> students = studentRepository.getStudentBySchoolId(schoolId);
+        return students;
+    }
+
+
     public void deleteStudentById(Integer studentId) {
         Student student = studentRepository.getStudentById(studentId);
         student.setIsActive(false);
@@ -94,12 +102,8 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public List<Student> getStudentsBySchoolId(Integer schoolId) {
-        List<Student> students = studentRepository.getStudentBySchoolId(schoolId);
-        return students;
-    }
 
-/*    public void getSchoolByNumberOfStudents(Integer numberOfStudents) {
+    public void getSchoolByNumberOfStudents(Integer numberOfStudents) {
         List<Student> students = studentRepository.getAllStudents();
         List<School> schools = new ArrayList<>();
         Set<Integer> schoolIds = new HashSet<>();
@@ -112,6 +116,6 @@ public class StudentService {
 
 
 
-    }*/
+    }
 
 }
