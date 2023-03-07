@@ -3,6 +3,7 @@ package com.codeline.SpringBootPractice.School.project.Model;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.*;
 @Data
 @Setter

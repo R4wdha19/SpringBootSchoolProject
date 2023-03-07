@@ -94,19 +94,22 @@ public class CourseService {
         course.setCreatedDate(new Date());
         courseRepository.save(course);
     }
-    public List<Course> getCoursesByCreatedDate(String createdDate) throws ParseException {
+
+    public List<Course> getCoursesByCreatedDate(String createdDate) {
         List<Course> course = courseRepository.getCourseByCreatedDate(createdDate);
         return course;
     }
 
-    public List<Course> getCoursesByUpdatedDate(String updatedDate) throws ParseException {
+    public List<Course> getCoursesByUpdatedDate(String updatedDate) {
         List<Course> course = courseRepository.getCourseByUpdatedDate(updatedDate);
         return course;
     }
+
     public List<Course> getCoursesByStudentId(Integer studentId) {
         List<Course> coursesOfAStudent = courseRepository.getCoursesByStudentId(studentId);
         return coursesOfAStudent;
     }
+
     public List<Course> getAllActiveCoursesForAStudent(Integer studentId) {
         List<Course> allActiveCoursesForAStudent = courseRepository.getAllActiveCoursesForAStudent(studentId);
         return allActiveCoursesForAStudent;
@@ -117,11 +120,13 @@ public class CourseService {
         course.stream().forEach(x -> x.setIsActive(false));
         courseRepository.saveAll(course);
     }
+
     public void deleteCoursesByUpdatedDate(String updatedDate) {
         List<Course> course = courseRepository.getCourseByUpdatedDate(updatedDate);
         course.stream().forEach(x -> x.setIsActive(false));
         courseRepository.saveAll(course);
     }
+
     public void deleteAllCoursesCreatedAfterDate(String createdDate) throws ParseException {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         Date usableDate = dateFormatter.parse(createdDate);
@@ -129,10 +134,10 @@ public class CourseService {
         course.stream().forEach(x -> x.setIsActive(false));
         courseRepository.saveAll(course);
     }
-    public void updateCourse(Integer courseId,String courseName, Integer studentId, Boolean isActive){
-     Course course =courseRepository.getCourseById(courseId);
+
+    public void updateCourse(Integer courseId, String courseName, Integer studentId, Boolean isActive) {
+        Course course = courseRepository.getCourseById(courseId);
         course.setCourseName(courseName);
-        course.setCreatedDate(new Date());
         course.setIsActive(isActive);
         course.setStudent(studentService.getStudentById(studentId));
         courseRepository.save(course);

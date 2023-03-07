@@ -71,6 +71,26 @@ public class StudentController {
         return student;
     }
 
+    @RequestMapping(value = "getByStudentByRollNumber", method = RequestMethod.GET)
+    public Student getByStudentByRollNumber(@RequestParam Integer studentRollNumber) {
+        Student student = studentService.getByStudentByRollNumber(studentRollNumber);
+        return student;
+    }
+
+    @RequestMapping(value = "getStudentsByCreatedDate", method = RequestMethod.GET)
+    public List<Student> getStudentsByCreatedDate(@RequestParam String createdDate) {
+        List<Student> student = studentService.getStudentsByCreatedDate(createdDate);
+        return student;
+
+    }
+
+    @RequestMapping(value = "getStudentsByUpdatedDate", method = RequestMethod.GET)
+    public List<Student> getStudentsByUpdatedDate(@RequestParam String updatedDate) {
+        List<Student> student = studentService.getStudentsByUpdatedDate(updatedDate);
+        return student;
+
+    }
+
     @RequestMapping(value = "deleteStudentById", method = RequestMethod.POST)
     public void deleteStudentById(@RequestParam Integer studentId) {
         studentService.deleteStudentById(studentId);
@@ -89,6 +109,26 @@ public class StudentController {
     @RequestMapping(value = "createStudent", method = RequestMethod.POST)
     public void createStudent(@RequestParam String studentName, Integer rollNumber, Integer schoolId) {
         studentService.createStudent(studentName, rollNumber, schoolId);
+    }
+    @RequestMapping(value = "deleteByStudentByRollNumber",method = RequestMethod.POST)
+    public void deleteByStudentByRollNumber(@RequestParam Integer rollNumber){
+        studentService.deleteByStudentByRollNumber(rollNumber);
+    }
+    @RequestMapping(value = "deleteStudentsBySchoolId",method = RequestMethod.POST)
+    public void deleteStudentsBySchoolId(@RequestParam Integer schoolId){
+        studentService.deleteStudentsBySchoolId(schoolId);
+    }
+    @RequestMapping(value = "deleteStudentsByCreatedDate",method = RequestMethod.POST)
+    public void deleteStudentsByCreatedDate(@RequestParam String createdDate){
+        studentService.deleteStudentsByCreatedDate(createdDate);
+    }
+    @RequestMapping(value = "deleteStudentsByUpdatedDate",method = RequestMethod.POST)
+    public void deleteStudentsByUpdatedDate(@RequestParam String updatedDate){
+        studentService.deleteStudentsByUpdatedDate(updatedDate);
+    }
+    @RequestMapping(value = "updateCourse",method = RequestMethod.POST)
+    public void updateStudent(@RequestParam Integer id,String studentName, Integer rollNumber, Integer schoolId, Boolean isActive){
+        studentService.updateStudent(id,studentName,rollNumber,schoolId,isActive);
     }
 
 }

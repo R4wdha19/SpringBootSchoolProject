@@ -1,6 +1,5 @@
 package com.codeline.SpringBootPractice.School.project.Repository;
 
-import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -44,18 +43,24 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query(value = " select st from Student st where st.updatedDate = (select Max(st.updatedDate) from Student st)")
     Student getLatestUpdatedDate();
 
+
+    @Query(value = "select distinct school_id from student", nativeQuery = true)
+    List<Integer> getDistinctSchoolIdsFromStudent();
+
+    @Query(value = "select count(id) from student where school_id = ?1", nativeQuery = true)
+    Integer getCountOfStudentsBySchoolId(Integer schoolId);
+
+    @Query(value = "select st from Student st where st.studentRollNumber = :studentRollNumber")
+    Student getByStudentByRollNumber(Integer studentRollNumber);
+
+    @Query(value = "select * from student where created_date like CONCAT (?1, '%') ", nativeQuery = true)
+    List<Student> getStudentsByCreatedDate(String createdDate);
+
+    @Query(value = "select * from student where updated_date like CONCAT (?1, '%') ", nativeQuery = true)
+    List<Student> getStudentsByUpdatedDate(String updatedDate);
     @Modifying
     @Transactional
     @Query(value = "update Student st Set st.isActive = false")
     void deleteAllStudents();
-/*
-    @Query(value = " select st from Student st where  ")
-    Student getSchoolByNumberOfStudents(Integer numberOfStudents);
-*/
-@Query(value = "select distinct school_id from student",nativeQuery = true)
-   List<Integer> getDistinctSchoolIdsFromStudent();
-@Query(value="select count(id) from student where school_id = ?1",nativeQuery = true)
-    Integer getCountOfStudentsBySchoolId(Integer schoolId);
-
 
 }

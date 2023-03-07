@@ -1,7 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
 import com.codeline.SpringBootPractice.School.project.Model.Mark;
-import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Repository.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

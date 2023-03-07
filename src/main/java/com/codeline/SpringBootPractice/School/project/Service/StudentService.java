@@ -7,7 +7,8 @@ import com.codeline.SpringBootPractice.School.project.Repository.StudentReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -47,7 +48,10 @@ public class StudentService {
         List<Student> allActiveStudents = studentRepository.getAllActiveStudents();
         return allActiveStudents;
     }
-
+    public Student  getByStudentByRollNumber(Integer studentRollNumber){
+        Student student = studentRepository.getByStudentByRollNumber(studentRollNumber);
+        return student;
+    }
     public List<Student> getAllInActiveStudents() {
         List<Student> allInActiveStudents = studentRepository.getAllInActiveStudents();
         return allInActiveStudents;
@@ -73,6 +77,17 @@ public class StudentService {
         return students;
     }
 
+    public List<Student> getStudentsByCreatedDate(String createdDate)  {
+        List<Student> student = studentRepository.getStudentsByCreatedDate(createdDate);
+        return student;
+    }
+
+    public List<Student> getStudentsByUpdatedDate(String updatedDate) {
+        List<Student> student = studentRepository.getStudentsByUpdatedDate(updatedDate);
+        return student;
+    }
+
+
 
     public void deleteStudentById(Integer studentId) {
         Student student = studentRepository.getStudentById(studentId);
@@ -89,6 +104,29 @@ public class StudentService {
         student.setIsActive(false);
         studentRepository.save(student);
     }
+    public void deleteByStudentByRollNumber(Integer rollNumber) {
+        Student student = studentRepository.getByStudentByRollNumber(rollNumber);
+        student.setIsActive(false);
+        studentRepository.save(student);
+    }
+    public void deleteStudentsBySchoolId(Integer schoolId) {
+      List<Student> student = studentRepository.getStudentBySchoolId(schoolId);
+        student.stream().forEach(x -> x.setIsActive(false));
+        studentRepository.saveAll(student);
+    }
+
+
+    public void deleteStudentsByCreatedDate(String createdDate) {
+        List<Student> student = studentRepository.getStudentsByCreatedDate(createdDate);
+        student.stream().forEach(x -> x.setIsActive(false));
+        studentRepository.saveAll(student);
+    }
+
+    public void deleteStudentsByUpdatedDate(String updatedDate) {
+        List<Student> student = studentRepository.getStudentsByUpdatedDate(updatedDate);
+        student.stream().forEach(x -> x.setIsActive(false));
+        studentRepository.saveAll(student);
+    }
 
     public void createStudent(String studentName, Integer rollNumber, Integer schoolId) {
         Student student = new Student();
@@ -101,6 +139,14 @@ public class StudentService {
     }
 
 
+    public void updateStudent(Integer id,String studentName, Integer rollNumber, Integer schoolId, Boolean isActive) {
+        Student student = studentRepository.getStudentById(id);
+        student.setStudentName(studentName);
+        student.setStudentRollNumber(rollNumber);
+        student.setSchool(schoolService.getSchoolById(schoolId));
+        student.setIsActive(isActive);
+        studentRepository.save(student);
+    }
 
 
 }

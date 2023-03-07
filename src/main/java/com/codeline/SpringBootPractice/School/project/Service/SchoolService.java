@@ -1,7 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
 import com.codeline.SpringBootPractice.School.project.Model.School;
-import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
 import com.codeline.SpringBootPractice.School.project.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,9 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class SchoolService {
@@ -132,20 +133,6 @@ public class SchoolService {
         schoolRepository.saveAll(schoolList);
 
     }
-
-/*    public void getSchoolByNumberOfStudents(Integer numberOfStudents) {
-        List<Student> students = studentRepository.getAllStudents();
-        List<School> schools = new ArrayList<>(); // to get the school ids
-        Set<Integer> schoolIds = new HashSet<>(); // so we will not have repeated ids
-        List<Integer> schoolIdList = new ArrayList<>(); // the school ids that we need to return
-        for (Student s : students) {   // forEach Loop that checks the school id for each student
-            schools.add(s.getSchool());
-            schoolIds.add(s.getSchool().getId());
-            schoolIdList.add(s.getSchool().getId());
-        }
-
-    }*/
-
 
     public List<School> getSchoolByNumberOfStudent(Integer numberOfStudent) {
         List<Integer> typesOfSchoolIdsInStudent = studentRepository.getDistinctSchoolIdsFromStudent();
