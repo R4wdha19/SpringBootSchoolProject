@@ -2,6 +2,7 @@ package com.codeline.SpringBootPractice.School.project.Controller;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Service.CourseService;
+import com.codeline.SpringBootPractice.School.project.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,8 @@ import java.util.List;
 public class CourseController {
     @Autowired
     CourseService courseService;
+    @Autowired
+    SlackClient slackClient;
 
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
     public List<Course> getAllCourses() {
@@ -28,6 +31,8 @@ public class CourseController {
     @RequestMapping(value = "getById", method = RequestMethod.GET)
     public Course getCourseById(@RequestParam Integer courseId) {
         Course course = courseService.getCourseById(courseId);
+        StringBuilder sb = new StringBuilder("*" + course.getCourseName() + "*");
+        slackClient.sendMessage(sb.toString());
         return course;
 
     }
