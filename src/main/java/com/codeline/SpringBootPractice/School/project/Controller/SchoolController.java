@@ -4,6 +4,7 @@ import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.RequestObjects.SchoolRequestForCreateDateUpdate;
 import com.codeline.SpringBootPractice.School.project.Service.SchoolService;
 import com.codeline.SpringBootPractice.School.project.Service.StudentService;
+import com.codeline.SpringBootPractice.School.project.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +19,13 @@ public class SchoolController {
     SchoolService schoolService;
     @Autowired
     StudentService studentService;
-
+    @Autowired
+   SlackClient slackClient;
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
     public List<School> getAllSchools() {
         List<School> schools = new ArrayList<>();
         schools = schoolService.getAllSchools();
+        slackClient.sendMessage(schoolService.formatSchoolListForSlack(schools).toString());
         return schools;
 
     }
@@ -30,6 +33,7 @@ public class SchoolController {
     @RequestMapping(value = "getById", method = RequestMethod.GET)
     public School getSchoolById(@RequestParam Integer schoolId) {
         School school = schoolService.getSchoolById(schoolId);
+        slackClient.sendMessage(schoolService.formatSchoolObjectForSlack(school).toString());
         return school;
 
     }
@@ -37,6 +41,7 @@ public class SchoolController {
     @RequestMapping(value = "getByName", method = RequestMethod.GET)
     public School getSchoolByName(@RequestParam String schoolName) {
         School school = schoolService.getSchoolByName(schoolName);
+        slackClient.sendMessage(schoolService.formatSchoolObjectForSlack(school).toString());
         return school;
 
     }
@@ -45,6 +50,7 @@ public class SchoolController {
     public List<School> getAllActiveSchools() {
         List<School> activeSchools = new ArrayList<>();
         activeSchools = schoolService.getAllActiveSchools();
+        slackClient.sendMessage(schoolService.formatSchoolListForSlack(activeSchools).toString());
         return activeSchools;
     }
 
@@ -52,6 +58,7 @@ public class SchoolController {
     public List<School> getAllInActiveSchools() {
         List<School> allInActiveSchools = new ArrayList<>();
         allInActiveSchools = schoolService.getAllInActiveSchools();
+        slackClient.sendMessage(schoolService.formatSchoolListForSlack(allInActiveSchools).toString());
         return allInActiveSchools;
     }
 
@@ -59,6 +66,7 @@ public class SchoolController {
     public List<School> getSchoolCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
         List<School> schools = new ArrayList<>();
         schools = schoolService.getSchoolCreatedAfterDate(createdDate);
+        slackClient.sendMessage(schoolService.formatSchoolListForSlack(schools).toString());
         return schools;
     }
 

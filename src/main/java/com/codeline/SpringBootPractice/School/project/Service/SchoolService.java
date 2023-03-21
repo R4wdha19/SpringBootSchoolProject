@@ -151,6 +151,25 @@ public class SchoolService {
         List<School> schoolThatUserWasLookingFor = schoolRepository.findAllById(schoolIdsThatUserWants);
         return schoolThatUserWasLookingFor;
     }
+
+    public StringBuilder formatSchoolObjectForSlack(School school){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Id: *" + school.getId() + "*\n");
+        sb.append("School Name: *" + school.getSchoolName() + "*\n");
+        sb.append("Is Active: *" + school.getIsActive() + "*\n");
+        sb.append("Created Date Is : "+ school.getCreatedDate()+ "*\n");
+        sb.append("Updated Date Is : "+ school.getUpdatedDate()+ "*\n");
+        return sb;
+    }
+
+    public StringBuilder formatSchoolListForSlack(List<School> schools){
+        StringBuilder mainStringBuilder = new StringBuilder();
+        for (School schoolFromListOfSchools: schools) {
+            mainStringBuilder.append(formatSchoolObjectForSlack(schoolFromListOfSchools));
+            mainStringBuilder.append("\n");
+        }
+        return mainStringBuilder;
+    }
 }
 
 
