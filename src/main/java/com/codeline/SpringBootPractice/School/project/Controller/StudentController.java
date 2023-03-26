@@ -25,12 +25,14 @@ public class StudentController {
     public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
         students = studentService.getAllStudents();
+        slackClient.sendMessage(studentService.formatStudentListForSlack(students).toString());
         return students;
     }
 
     @RequestMapping(value = "getById", method = RequestMethod.GET)
     public Student getStudentById(@RequestParam Integer studentId) {
         Student student = studentService.getStudentById(studentId);
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(student).toString());
         return student;
 
     }
@@ -38,6 +40,7 @@ public class StudentController {
     @RequestMapping(value = "getByName", method = RequestMethod.GET)
     public Student getStudentByStudentName(@RequestParam String studentName) {
         Student student = studentService.getStudentByStudentName(studentName);
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(student).toString());
         return student;
     }
 
@@ -45,6 +48,7 @@ public class StudentController {
     public List<Student> getAllActiveStudents() {
         List<Student> AllActiveStudents = new ArrayList<>();
         AllActiveStudents = studentService.getAllActiveStudents();
+        slackClient.sendMessage(studentService.formatStudentListForSlack(AllActiveStudents).toString());
         return AllActiveStudents;
     }
 
@@ -52,45 +56,52 @@ public class StudentController {
     public List<Student> getAllInActiveStudents() {
         List<Student> AllInActiveStudents = new ArrayList<>();
         AllInActiveStudents = studentService.getAllInActiveStudents();
+        slackClient.sendMessage(studentService.formatStudentListForSlack(AllInActiveStudents).toString());
         return AllInActiveStudents;
     }
 
     @RequestMapping(value = "getStudentCreatedAfterDate", method = RequestMethod.GET)
     public List<Student> getStudentCreatedAfterDate() {
-        List<Student> studentList = new ArrayList<>();
-        studentList = studentService.getStudentCreatedAfterDate();
-        return studentList;
+        List<Student> studentListCreatedAfterDate = new ArrayList<>();
+        studentListCreatedAfterDate = studentService.getStudentCreatedAfterDate();
+        slackClient.sendMessage(studentService.formatStudentListForSlack(studentListCreatedAfterDate).toString());
+        return studentListCreatedAfterDate;
     }
 
     @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
     public Student getLatestRow() {
-        Student student = studentService.getLatestRow();
-        return student;
+        Student studentLatestRow = studentService.getLatestRow();
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(studentLatestRow).toString());
+        return studentLatestRow;
     }
 
     @RequestMapping(value = "getLatestUpdatedDate", method = RequestMethod.GET)
     public Student getLatestUpdatedDate() {
-        Student student = studentService.getLatestUpdatedDate();
-        return student;
+        Student studentLatestUpdatedDate = studentService.getLatestUpdatedDate();
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(studentLatestUpdatedDate).toString());
+        return studentLatestUpdatedDate;
     }
 
     @RequestMapping(value = "getByStudentByRollNumber", method = RequestMethod.GET)
     public Student getByStudentByRollNumber(@RequestParam Integer studentRollNumber) {
-        Student student = studentService.getByStudentByRollNumber(studentRollNumber);
-        return student;
+        Student studentByRollNumber = studentService.getByStudentByRollNumber(studentRollNumber);
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(studentByRollNumber).toString());
+        return studentByRollNumber;
     }
 
     @RequestMapping(value = "getStudentsByCreatedDate", method = RequestMethod.GET)
     public List<Student> getStudentsByCreatedDate(@RequestParam String createdDate) {
-        List<Student> student = studentService.getStudentsByCreatedDate(createdDate);
-        return student;
+        List<Student> studentsByCreatedDate = studentService.getStudentsByCreatedDate(createdDate);
+        slackClient.sendMessage(studentService.formatStudentListForSlack(studentsByCreatedDate).toString());
+        return studentsByCreatedDate;
 
     }
 
     @RequestMapping(value = "getStudentsByUpdatedDate", method = RequestMethod.GET)
     public List<Student> getStudentsByUpdatedDate(@RequestParam String updatedDate) {
-        List<Student> student = studentService.getStudentsByUpdatedDate(updatedDate);
-        return student;
+        List<Student> studentsByUpdatedDate = studentService.getStudentsByUpdatedDate(updatedDate);
+        slackClient.sendMessage(studentService.formatStudentListForSlack(studentsByUpdatedDate).toString());
+        return studentsByUpdatedDate;
 
     }
 
