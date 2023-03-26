@@ -157,8 +157,8 @@ public class SchoolService {
         sb.append("Id: *" + school.getId() + "*\n");
         sb.append("School Name: *" + school.getSchoolName() + "*\n");
         sb.append("Is Active: *" + school.getIsActive() + "*\n");
-        sb.append("Created Date Is : "+ school.getCreatedDate()+ "*\n");
-        sb.append("Updated Date Is : "+ school.getUpdatedDate()+ "*\n");
+        sb.append("Created Date Is : *"+ school.getCreatedDate()+ "*\n");
+        sb.append("Updated Date Is : *"+ school.getUpdatedDate()+ "*\n");
         return sb;
     }
 

@@ -149,8 +149,8 @@ public class CourseService {
         stringBuilder.append("Id: *" +course.getId() + "*\n");
         stringBuilder.append("Course Is : *"+ course.getCourseName() + "*\n");
         stringBuilder.append("Is Active: *" + course.getIsActive() + "*\n");
-        stringBuilder.append("Created Date Is : "+ course.getCreatedDate()+ "*\n");
-        stringBuilder.append("Updated Date Is : "+ course.getUpdatedDate()+ "*\n");
+        stringBuilder.append("Created Date Is : *"+ course.getCreatedDate()+ "*\n");
+        stringBuilder.append("Updated Date Is : *"+ course.getUpdatedDate()+ "*\n");
         return stringBuilder;
     }
 

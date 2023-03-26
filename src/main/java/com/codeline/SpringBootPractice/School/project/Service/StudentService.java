@@ -158,8 +158,8 @@ public class StudentService {
         stringBuilder.append(" Student Roll Number Is : *" + student.getStudentRollNumber() + "*\n");
         stringBuilder.append(" Student School Id Is : * " + student.getSchool().getId() + "*\n");
         stringBuilder.append(" Student Is Active: *" + student.getIsActive() + "*\n");
-        stringBuilder.append(" Student Created Date Is : "+ student.getCreatedDate()+ "*\n");
-        stringBuilder.append(" Student Updated Date Is : "+ student.getUpdatedDate()+ "*\n");
+        stringBuilder.append(" Student Created Date Is : *"+ student.getCreatedDate()+ "*\n");
+        stringBuilder.append(" Student Updated Date Is : *"+ student.getUpdatedDate()+ "*\n");
         return stringBuilder;
     }
 
