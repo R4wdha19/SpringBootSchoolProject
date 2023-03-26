@@ -3,6 +3,7 @@ package com.codeline.SpringBootPractice.School.project.Schedule;
 import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.Mark;
 import com.codeline.SpringBootPractice.School.project.Model.School;
+import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Service.CourseService;
 import com.codeline.SpringBootPractice.School.project.Service.MarkService;
 import com.codeline.SpringBootPractice.School.project.Service.SchoolService;
@@ -184,6 +185,67 @@ public class Schedule {
     }
 
     // Scheduling Student APIs
+
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void getAllStudents() {
+        List<Student> studentList = studentService.getAllStudents();
+        slackClient.sendMessage(studentService.formatStudentListForSlack(studentList).toString());
+    }
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void getStudentById() {
+        Student student = studentService.getStudentById(3);
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(student).toString());
+    }
+
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void getStudentByStudentName() {
+        Student student = studentService.getStudentByStudentName("Shim");
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(student).toString());
+    }
+
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void getAllActiveStudents() {
+        List<Student> studentList = studentService.getAllActiveStudents();
+        slackClient.sendMessage(studentService.formatStudentListForSlack(studentList).toString());
+    }
+
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void getAllInActiveStudents() {
+        List<Student> studentList = studentService.getAllInActiveStudents();
+        slackClient.sendMessage(studentService.formatStudentListForSlack(studentList).toString());
+    }
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void getStudentCreatedAfterDate() {
+        List<Student> studentList = studentService.getStudentCreatedAfterDate();
+        slackClient.sendMessage(studentService.formatStudentListForSlack(studentList).toString());
+    }
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void getStudentsLatestRow() {
+        Student student = studentService.getLatestRow();
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(student).toString());
+    }
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void  getStudentsByUpdatedDate() {
+        List<Student> studentsByUpdatedDate = studentService.getStudentsByUpdatedDate("2022-02-25");
+        slackClient.sendMessage(studentService.formatStudentListForSlack(studentsByUpdatedDate).toString());
+    }
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void  studentLatestUpdatedDate() {
+        Student student = studentService.getLatestUpdatedDate();
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(student).toString());
+    }
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void   getStudentsByCreatedDate() {
+        List<Student> studentsByCreatedDate = studentService.getStudentsByCreatedDate("2022-02-25");
+        slackClient.sendMessage(studentService.formatStudentListForSlack(studentsByCreatedDate).toString());
+    }
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void getByStudentByRollNumber() {
+        Student student = studentService.getByStudentByRollNumber(3);
+        slackClient.sendMessage(studentService.formatStudentObjectForSlack(student).toString());
+    }
+
+
 
 
 
