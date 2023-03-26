@@ -1,7 +1,12 @@
 package com.codeline.SpringBootPractice.School.project.Schedule;
 
+import com.codeline.SpringBootPractice.School.project.Model.Course;
+import com.codeline.SpringBootPractice.School.project.Model.Mark;
 import com.codeline.SpringBootPractice.School.project.Model.School;
+import com.codeline.SpringBootPractice.School.project.Service.CourseService;
+import com.codeline.SpringBootPractice.School.project.Service.MarkService;
 import com.codeline.SpringBootPractice.School.project.Service.SchoolService;
+import com.codeline.SpringBootPractice.School.project.Service.StudentService;
 import com.codeline.SpringBootPractice.School.project.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,7 +23,12 @@ public class Schedule {
     SlackClient slackClient;
     @Autowired
     SchoolService schoolService;
-
+    @Autowired
+    MarkService markService;
+    @Autowired
+    CourseService courseService;
+    @Autowired
+    StudentService studentService;
 
     @Scheduled(cron = "0 0/15 * * * *")
     public void getAllSchools() {
@@ -67,6 +77,114 @@ public class Schedule {
         School school = schoolService.getLatestUpdatedDate();
         slackClient.sendMessage(schoolService.formatSchoolObjectForSlack(school).toString());
     }
+         // Scheduling Courses APIs
+    @Scheduled(cron = "0 0/23 * * * *")
+    public void getAllCourses() {
+       List<Course> course = courseService.getAllCourses();
+        slackClient.sendMessage(courseService.formatCourseListForSlack(course).toString());
+    }
+    @Scheduled(cron = "0 0/24 * * * *")
+    public void getCourseById() {
+        Course course = courseService.getCourseById(2);
+        slackClient.sendMessage(courseService.formatCourseObjectForSlack(course).toString());
+    }
+    @Scheduled(cron = "0 0/25 * * * *")
+    public void getCourseByName() {
+        List<Course> course = courseService.getCoursesByName("Math");
+        slackClient.sendMessage(courseService.formatCourseListForSlack(course).toString());
+    }
+
+    @Scheduled(cron = "0 0/26 * * * *")
+    public void getAllActiveCourses() {
+        List<Course> course = courseService.getAllActiveCourses();
+        slackClient.sendMessage(courseService.formatCourseListForSlack(course).toString());
+    }
+
+    @Scheduled(cron = "0 0/27 * * * *")
+    public void getAllInActiveCourses() {
+        List<Course> course = courseService.getAllInActiveCourses();
+        slackClient.sendMessage(courseService.formatCourseListForSlack(course).toString());
+    }
+    @Scheduled(cron = "0 0/28 * * * *")
+    public void getCourseCreatedAfterDate() throws ParseException {
+        List<Course> course = courseService.getCoursesCreatedAfterDate("2022-02-25");
+        slackClient.sendMessage(courseService.formatCourseListForSlack(course).toString());
+    }
+
+    @Scheduled(cron = "0 0/29 * * * *")
+    public void getCourseLatestUpdatedDate() {
+        Course course = courseService.getLatestUpdatedDate();
+        slackClient.sendMessage(courseService.formatCourseObjectForSlack(course).toString());
+    }
+
+      // Scheduling Mark APIs
+
+    @Scheduled(cron = "0 0/30 * * * *")
+    public void getAllMarks() {
+        List<Mark> markList = markService.getAllMarks();
+        slackClient.sendMessage(markService.formatMarkListForSlack(markList).toString());
+    }
+
+    @Scheduled(cron = "0 0/31 * * * *")
+    public void getMarkById() {
+        Mark mark = markService.getMarkById(2);
+        slackClient.sendMessage(markService.formatMarkObjectForSlack(mark).toString());
+    }
+
+    @Scheduled(cron = "0 0/32 * * * *")
+    public void getMarkByGrade() {
+        List<Mark> mark = markService.getMarkByGrade("A");
+        slackClient.sendMessage(markService.formatMarkListForSlack(mark).toString());
+    }
+    @Scheduled(cron = "0 0/33 * * * *")
+    public void getAllActiveMarks() {
+        List<Mark> markList = markService.getAllActiveMarks();
+        slackClient.sendMessage(markService.formatMarkListForSlack(markList).toString());
+    }
+
+    @Scheduled(cron = "0 0/34 * * * *")
+    public void getAllInActiveMarks() {
+        List<Mark> markList = markService.getAllInActiveMarks();
+        slackClient.sendMessage(markService.formatMarkListForSlack(markList).toString());
+    }
+
+    @Scheduled(cron = "0 0/35 * * * *")
+    public void getMarkLatestRow() {
+        Mark mark = markService.getLatestRow();
+        slackClient.sendMessage(markService.formatMarkObjectForSlack(mark).toString());
+    }
+
+    @Scheduled(cron = "0 0/36 * * * *")
+    public void getMarkCreatedAfterDate() throws ParseException {
+        List<Mark> markList = markService.getMarkCreatedAfterDate("2022-02-25");
+        slackClient.sendMessage(markService.formatMarkListForSlack(markList).toString());
+    }
+
+    @Scheduled(cron = "0 0/37 * * * *")
+    public void getMarkLatestUpdatedDate() {
+        List<Mark> markList = markService.getMarksByUpdatedDate("2022-02-25");
+        slackClient.sendMessage(markService.formatMarkListForSlack(markList).toString());
+    }
+    @Scheduled(cron = "0 0/38 * * * *")
+    public void getByObtainedMarksMoreThan() {
+        List<Mark> markList = markService.getByObtainedMarksMoreThan(90);
+        slackClient.sendMessage(markService.formatMarkListForSlack(markList).toString());
+    }
+
+    @Scheduled(cron = "0 0/39 * * * *")
+    public void getByObtainedMarksLessThan() {
+        List<Mark> markList = markService.getByObtainedMarksLessThan(50);
+        slackClient.sendMessage(markService.formatMarkListForSlack(markList).toString());
+    }
+
+    @Scheduled(cron = "0 0/40 * * * *")
+    public void getMarksByCourseId() {
+        List<Mark> markList = markService.getMarksByCourseId(2);
+        slackClient.sendMessage(markService.formatMarkListForSlack(markList).toString());
+    }
+
+    // Scheduling Student APIs
+
 
 
 }
