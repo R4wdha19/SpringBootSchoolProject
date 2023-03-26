@@ -48,10 +48,12 @@ public class StudentService {
         List<Student> allActiveStudents = studentRepository.getAllActiveStudents();
         return allActiveStudents;
     }
-    public Student  getByStudentByRollNumber(Integer studentRollNumber){
+
+    public Student getByStudentByRollNumber(Integer studentRollNumber) {
         Student student = studentRepository.getByStudentByRollNumber(studentRollNumber);
         return student;
     }
+
     public List<Student> getAllInActiveStudents() {
         List<Student> allInActiveStudents = studentRepository.getAllInActiveStudents();
         return allInActiveStudents;
@@ -77,7 +79,7 @@ public class StudentService {
         return students;
     }
 
-    public List<Student> getStudentsByCreatedDate(String createdDate)  {
+    public List<Student> getStudentsByCreatedDate(String createdDate) {
         List<Student> student = studentRepository.getStudentsByCreatedDate(createdDate);
         return student;
     }
@@ -86,7 +88,6 @@ public class StudentService {
         List<Student> student = studentRepository.getStudentsByUpdatedDate(updatedDate);
         return student;
     }
-
 
 
     public void deleteStudentById(Integer studentId) {
@@ -104,13 +105,15 @@ public class StudentService {
         student.setIsActive(false);
         studentRepository.save(student);
     }
+
     public void deleteByStudentByRollNumber(Integer rollNumber) {
         Student student = studentRepository.getByStudentByRollNumber(rollNumber);
         student.setIsActive(false);
         studentRepository.save(student);
     }
+
     public void deleteStudentsBySchoolId(Integer schoolId) {
-      List<Student> student = studentRepository.getStudentBySchoolId(schoolId);
+        List<Student> student = studentRepository.getStudentBySchoolId(schoolId);
         student.stream().forEach(x -> x.setIsActive(false));
         studentRepository.saveAll(student);
     }
@@ -139,13 +142,34 @@ public class StudentService {
     }
 
 
-    public void updateStudent(Integer id,String studentName, Integer rollNumber, Integer schoolId, Boolean isActive) {
+    public void updateStudent(Integer id, String studentName, Integer rollNumber, Integer schoolId, Boolean isActive) {
         Student student = studentRepository.getStudentById(id);
         student.setStudentName(studentName);
         student.setStudentRollNumber(rollNumber);
         student.setSchool(schoolService.getSchoolById(schoolId));
         student.setIsActive(isActive);
         studentRepository.save(student);
+    }
+
+    public StringBuilder formatStudentObjectForSlack(Student student) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(" Id: *" + student.getId() + "*\n");
+        stringBuilder.append(" Student Name Is : *" + student.getStudentName() + "*\n");
+        stringBuilder.append(" Student Roll Number Is : *" + student.getStudentRollNumber() + "*\n");
+        stringBuilder.append(" Student School Id Is : * " + student.getSchool().getId() + "*\n");
+        stringBuilder.append(" Student Is Active: *" + student.getIsActive() + "*\n");
+        stringBuilder.append(" Student Created Date Is : "+ student.getCreatedDate()+ "*\n");
+        stringBuilder.append(" Student Updated Date Is : "+ student.getUpdatedDate()+ "*\n");
+        return stringBuilder;
+    }
+
+    public StringBuilder formatStudentListForSlack(List<Student> students) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Student studentFromListOfStudents : students) {
+            stringBuilder.append(formatStudentObjectForSlack(studentFromListOfStudents));
+            stringBuilder.append("\n");
+        }
+        return stringBuilder;
     }
 
 

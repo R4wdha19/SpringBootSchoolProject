@@ -1,6 +1,7 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
+import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,6 +142,25 @@ public class CourseService {
         course.setIsActive(isActive);
         course.setStudent(studentService.getStudentById(studentId));
         courseRepository.save(course);
+    }
+
+    public StringBuilder formatCourseObjectForSlack(Course course){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Id: *" +course.getId() + "*\n");
+        stringBuilder.append("Course Is : *"+ course.getCourseName() + "*\n");
+        stringBuilder.append("Is Active: *" + course.getIsActive() + "*\n");
+        stringBuilder.append("Created Date Is : "+ course.getCreatedDate()+ "*\n");
+        stringBuilder.append("Updated Date Is : "+ course.getUpdatedDate()+ "*\n");
+        return stringBuilder;
+    }
+
+    public StringBuilder formatCourseListForSlack(List<Course> courses){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Course courseFromListOfCourses: courses) {
+            stringBuilder.append(formatCourseObjectForSlack(courseFromListOfCourses));
+            stringBuilder.append("\n");
+        }
+        return stringBuilder;
     }
 
 

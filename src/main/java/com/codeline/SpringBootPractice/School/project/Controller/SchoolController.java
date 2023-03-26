@@ -18,8 +18,6 @@ public class SchoolController {
     @Autowired
     SchoolService schoolService;
     @Autowired
-    StudentService studentService;
-    @Autowired
    SlackClient slackClient;
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
     public List<School> getAllSchools() {
@@ -82,12 +80,14 @@ public class SchoolController {
     @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
     public School getLatestRow() {
         School school = schoolService.getLatestRow();
+        slackClient.sendMessage(schoolService.formatSchoolObjectForSlack(school).toString());
         return school;
     }
 
     @RequestMapping(value = "getLatestUpdatedDate", method = RequestMethod.GET)
     public School getLatestUpdatedDate() {
         School school = schoolService.getLatestUpdatedDate();
+        slackClient.sendMessage(schoolService.formatSchoolObjectForSlack(school).toString());
         return school;
     }
 
@@ -119,12 +119,14 @@ public class SchoolController {
     @RequestMapping(value = "getSchoolsByCreatedDate", method = RequestMethod.GET)
     public List<School> getSchoolsByCreatedDate(String createdDate) throws ParseException {
         List<School> schools = schoolService.getSchoolsByCreatedDate(createdDate);
+        slackClient.sendMessage(schoolService.formatSchoolListForSlack(schools).toString());
         return schools;
     }
 
     @RequestMapping(value = "getSchoolsByUpdatedDate", method = RequestMethod.GET)
     public List<School> getSchoolsByUpdatedDate(String updatedDate) throws ParseException {
         List<School> schools = schoolService.getSchoolsByUpdatedDate(updatedDate);
+        slackClient.sendMessage(schoolService.formatSchoolListForSlack(schools).toString());
         return schools;
     }
 
@@ -141,6 +143,7 @@ public class SchoolController {
     @RequestMapping(value = "getSchoolByNumberOfStudents", method = RequestMethod.GET)
     public List<School> getSchoolByNumberOfStudents(@RequestParam Integer numberOFStudents) {
         List<School> schoolList = schoolService.getSchoolByNumberOfStudent(numberOFStudents);
+        slackClient.sendMessage(schoolService.formatSchoolListForSlack(schoolList).toString());
         return schoolList;
     }
 }

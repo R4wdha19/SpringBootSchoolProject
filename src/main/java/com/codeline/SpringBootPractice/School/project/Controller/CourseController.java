@@ -25,28 +25,30 @@ public class CourseController {
     public List<Course> getAllCourses() {
         List<Course> courses = new ArrayList<>();
         courses = courseService.getAllCourses();
+        slackClient.sendMessage(courseService.formatCourseListForSlack(courses).toString());
         return courses;
     }
 
     @RequestMapping(value = "getById", method = RequestMethod.GET)
     public Course getCourseById(@RequestParam Integer courseId) {
         Course course = courseService.getCourseById(courseId);
-        StringBuilder sb = new StringBuilder("*" + course.getCourseName() + "*");
-        slackClient.sendMessage(sb.toString());
+        slackClient.sendMessage(courseService.formatCourseObjectForSlack(course).toString());
         return course;
 
     }
 
     @RequestMapping(value = "getByName", method = RequestMethod.GET)
     public List<Course> getCourseByName(@RequestParam String courseName) {
-        List<Course> course = courseService.getCoursesByName(courseName);
-        return course;
+        List<Course> coursesByName = courseService.getCoursesByName(courseName);
+        slackClient.sendMessage(courseService.formatCourseListForSlack(coursesByName).toString());
+        return coursesByName;
     }
 
     @RequestMapping(value = "getAllActiveCourses", method = RequestMethod.GET)
     public List<Course> getAllActiveCourses() {
         List<Course> activeCourseList = new ArrayList<>();
         activeCourseList = courseService.getAllActiveCourses();
+        slackClient.sendMessage(courseService.formatCourseListForSlack(activeCourseList).toString());
         return activeCourseList;
     }
 
@@ -54,6 +56,7 @@ public class CourseController {
     public List<Course> getAllInActiveCourses() {
         List<Course> inActiveCourseList = new ArrayList<>();
         inActiveCourseList = courseService.getAllInActiveCourses();
+        slackClient.sendMessage(courseService.formatCourseListForSlack(inActiveCourseList).toString());
         return inActiveCourseList;
     }
 
@@ -61,21 +64,57 @@ public class CourseController {
     public List<Course> getCourseCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
         List<Course> courseList = new ArrayList<>();
         courseList = courseService.getCoursesCreatedAfterDate(createdDate);
+        slackClient.sendMessage(courseService.formatCourseListForSlack(courseList).toString());
         return courseList;
     }
 
     @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
     public Course getLatestRow() {
-        Course course = courseService.getLatestRow();
-        return course;
+        Course courseLatestRow = courseService.getLatestRow();
+        slackClient.sendMessage(courseService.formatCourseObjectForSlack(courseLatestRow).toString());
+        return courseLatestRow;
     }
 
     @RequestMapping(value = "getLatestUpdatedDate", method = RequestMethod.GET)
     public Course getLatestUpdatedDate() {
-        Course course = courseService.getLatestUpdatedDate();
-        return course;
+        Course courseLatestUpdatedDate = courseService.getLatestUpdatedDate();
+        slackClient.sendMessage(courseService.formatCourseObjectForSlack(courseLatestUpdatedDate).toString());
+        return courseLatestUpdatedDate;
     }
 
+    @RequestMapping(value = "createCourse", method = RequestMethod.POST)
+    public void createCourse(@RequestParam String courseName, Integer studentId) {
+        courseService.createCourse(courseName, studentId);
+    }
+
+    @RequestMapping(value = "getCourseByCreatedDate", method = RequestMethod.GET)
+    public List<Course> getCourseByCreatedDate(@RequestParam String createdDate)  {
+        List<Course> coursesByCreatedDate = courseService.getCoursesByCreatedDate(createdDate);
+        slackClient.sendMessage(courseService.formatCourseListForSlack(coursesByCreatedDate).toString());
+        return coursesByCreatedDate;
+
+    }
+
+    @RequestMapping(value = "getCourseByUpdatedDate", method = RequestMethod.GET)
+    public List<Course> getCourseByUpdatedDate(@RequestParam String updatedDate)  {
+        List<Course> coursesByUpdatedDate = courseService.getCoursesByUpdatedDate(updatedDate);
+        slackClient.sendMessage(courseService.formatCourseListForSlack(coursesByUpdatedDate).toString());
+        return coursesByUpdatedDate;
+
+    }
+
+    @RequestMapping(value = "getCourseByStudentId", method = RequestMethod.GET)
+    public List<Course> getCourseByStudentId(@RequestParam Integer studentId) {
+        List<Course> coursesOfAStudent = courseService.getCoursesByStudentId(studentId);
+        slackClient.sendMessage(courseService.formatCourseListForSlack(coursesOfAStudent).toString());
+        return coursesOfAStudent;
+    }
+    @RequestMapping(value = "getAllActiveCoursesForAStudent", method = RequestMethod.GET)
+    public List<Course> getAllActiveCoursesForAStudent(@RequestParam Integer studentId) {
+        List<Course> AllActiveCoursesForAStudent = courseService.getCoursesByStudentId(studentId);
+        slackClient.sendMessage(courseService.formatCourseListForSlack(AllActiveCoursesForAStudent).toString());
+        return AllActiveCoursesForAStudent;
+    }
     @RequestMapping(value = "deleteCourseById", method = RequestMethod.POST)
     public void deleteCourseById(@RequestParam Integer courseId) {
         courseService.deleteCourseById(courseId);
@@ -91,35 +130,6 @@ public class CourseController {
         courseService.deleteCoursesByName(courseName);
     }
 
-    @RequestMapping(value = "createCourse", method = RequestMethod.POST)
-    public void createCourse(@RequestParam String courseName, Integer studentId) {
-        courseService.createCourse(courseName, studentId);
-    }
-
-    @RequestMapping(value = "getCourseByCreatedDate", method = RequestMethod.GET)
-    public List<Course> getCourseByCreatedDate(@RequestParam String createdDate)  {
-        List<Course> course = courseService.getCoursesByCreatedDate(createdDate);
-        return course;
-
-    }
-
-    @RequestMapping(value = "getCourseByUpdatedDate", method = RequestMethod.GET)
-    public List<Course> getCourseByUpdatedDate(@RequestParam String updatedDate)  {
-        List<Course> course = courseService.getCoursesByUpdatedDate(updatedDate);
-        return course;
-
-    }
-
-    @RequestMapping(value = "getCourseByStudentId", method = RequestMethod.GET)
-    public List<Course> getCourseByStudentId(@RequestParam Integer studentId) {
-        List<Course> coursesOfAStudent = courseService.getCoursesByStudentId(studentId);
-        return coursesOfAStudent;
-    }
-    @RequestMapping(value = "getAllActiveCoursesForAStudent", method = RequestMethod.GET)
-    public List<Course> getAllActiveCoursesForAStudent(@RequestParam Integer studentId) {
-        List<Course> AllActiveCoursesForAStudent = courseService.getCoursesByStudentId(studentId);
-        return AllActiveCoursesForAStudent;
-    }
     @RequestMapping(value = "deleteCoursesByCreatedDate", method = RequestMethod.POST)
     public void deleteCoursesByCreatedDate(@RequestParam String createdDate){
         courseService.deleteCoursesByCreatedDate(createdDate);
