@@ -58,7 +58,18 @@ class CourseControllerTest {
         String courseName = coursesByName.get(0).getCourseName();
      assertEquals("English",courseName);
     }
-
+    @Test
+    void testingCreatedDateIsNotNull() {
+        List<Course> coursesByName = courseController .getCourseByName("English");
+        Date createdDate = coursesByName.get(0).getCreatedDate();
+        assertNotNull(createdDate);
+    }
+    @Test
+    void testingGettingTheCorrectNumberOfCourse() {
+        List<Course> coursesByName = courseController .getCourseByName("English");
+        Integer listSize = coursesByName.size();
+        assertEquals(3,listSize);
+    }
     @Test
     void getAllActiveCourses() {
     }
