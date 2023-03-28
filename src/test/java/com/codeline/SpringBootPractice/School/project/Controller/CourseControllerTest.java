@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,14 +23,40 @@ class CourseControllerTest {
     }
 
     @Test
-    void getCourseByIdTest() {
+    void getCourseByIdTestingStudentId() throws Exception {
         Course courseById= courseController.getCourseById(1);
         Integer studentId = courseById.getStudent().getId();
         assertEquals(2,studentId);
     }
-
     @Test
-    void getCourseByName() {
+    void getCourseByIdTestingCourseName() throws Exception {
+        Course courseById= courseController.getCourseById(1);
+        String courseName = courseById.getCourseName();
+        assertEquals("Kinder",courseName);
+    }
+    @Test
+    void getCourseByIdTestingStatus() throws Exception {
+        Course courseById= courseController.getCourseById(1);
+        Boolean status = courseById.getIsActive();
+        assertTrue(status);
+    }
+    @Test
+    void getCourseByIdTestingUpdatedDate() throws Exception {
+        Course courseById= courseController.getCourseById(1);
+        Date updatedDate = courseById.getUpdatedDate();
+        assertEquals("2023-03-05 14:34:03.561",updatedDate.toString());
+    }
+    @Test
+    void testingSizeOfCoursesList() {
+        List<Course> coursesByName = courseController .getCourseByName("English");
+        Integer listSize = coursesByName.size();
+        assertNotEquals(0,listSize);
+    }
+    @Test
+    void testingGettingTheCorrectName() {
+        List<Course> coursesByName = courseController .getCourseByName("English");
+        String courseName = coursesByName.get(0).getCourseName();
+     assertEquals("English",courseName);
     }
 
     @Test

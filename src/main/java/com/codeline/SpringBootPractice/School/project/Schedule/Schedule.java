@@ -60,7 +60,7 @@ public class Schedule {
         slackClient.sendMessage(schoolService.formatSchoolListForSlack(schools).toString());
     }
 
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "0 0/15 * * * *")
     public void getSchoolCreatedAfterDate() throws ParseException {
         List<School> schools = schoolService.getSchoolCreatedAfterDate("2022-02-25");
         slackClient.sendMessage(schoolService.formatSchoolListForSlack(schools).toString());
