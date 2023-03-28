@@ -16,4 +16,22 @@ public class School extends BaseEntity {
     Integer id;
     @Column(name = "SchoolName")
     String schoolName;
+
+    public School() {
+    }
+
+    public School(Integer id) {
+        this.id = id;
+    }
+
+    public School(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
+    public School(Integer id, String schoolName){
+        this.schoolName = schoolName;
+        this.id = id;
+    }
+
+
 }
