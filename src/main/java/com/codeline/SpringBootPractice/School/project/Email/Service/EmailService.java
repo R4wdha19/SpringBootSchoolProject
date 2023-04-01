@@ -61,8 +61,7 @@ public class EmailService implements EmailRepository {
         try {
 
             // Creating a simple mail message
-            SimpleMailMessage mailMessage
-                    = new SimpleMailMessage();
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
 
             // Setting up necessary details
             mailMessage.setFrom(sender);
@@ -123,29 +122,23 @@ public class EmailService implements EmailRepository {
     @Override
     public String sendMailWithAttachment(EmailDetails details) {
         // Creating a mime message
-        MimeMessage mimeMessage
-                = mailSender.createMimeMessage();
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper;
 
         try {
 
             // Setting multipart as true for attachments to
             // be send
-            mimeMessageHelper
-                    = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
             mimeMessageHelper.setFrom(sender);
             mimeMessageHelper.setTo(details.getRecipient().get(0));
             mimeMessageHelper.setText(details.getMsgBody());
-            mimeMessageHelper.setSubject(
-                    details.getSubject());
+            mimeMessageHelper.setSubject(details.getSubject());
 
             // Adding the attachment
-            FileSystemResource file
-                    = new FileSystemResource(
-                    new File(details.getAttachment()));
+            FileSystemResource file = new FileSystemResource(new File(details.getAttachment()));
 
-            mimeMessageHelper.addAttachment(
-                    file.getFilename(), file);
+            mimeMessageHelper.addAttachment(file.getFilename(), file);
 
             // Sending the mail
             mailSender.send(mimeMessage);
