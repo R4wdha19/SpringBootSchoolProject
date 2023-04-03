@@ -25,30 +25,30 @@ class CourseControllerTest {
 
     @Test
     void testingTheStudentIdFromGetCourseById() throws Exception {
-        Course courseById = courseController.getCourseById(5);
+        Course courseById = courseController.getCourseById(1);
         Integer studentId = courseById.getStudent().getId();
-        assertEquals(3, studentId);
+        assertEquals(2, studentId);
     }
 
     @Test
     void testingTheCourseNameFromGetCourseById() throws Exception {
-        Course courseById = courseController.getCourseById(3);
+        Course courseById = courseController.getCourseById(1);
         String courseName = courseById.getCourseName();
-        assertEquals("Math", courseName);
+        assertEquals("Kinder", courseName);
     }
 
     @Test
     void testingTheStatusFromGetCourseById() throws Exception {
-        Course courseById = courseController.getCourseById(4);
+        Course courseById = courseController.getCourseById(1);
         Boolean status = courseById.getIsActive();
         assertTrue(status);
     }
 
     @Test
     void testingTheUpdatedDateFromGetCourseById() throws Exception {
-        Course courseById = courseController.getCourseById(9);
+        Course courseById = courseController.getCourseById(1);
         Date updatedDate = courseById.getUpdatedDate();
-        assertEquals("2023-03-02 12:33:31.04", updatedDate.toString());
+        assertEquals("2023-03-05 14:34:03.561", updatedDate.toString());
     }
 
     @Test
@@ -80,7 +80,7 @@ class CourseControllerTest {
     }
 
     @Test
-    void testingTheListSizeAllActiveCourses() {
+    void testingSizeOfAllActiveCourses() {
         List<Course> allActiveCourses = courseController.getAllActiveCourses();
         Integer sizeOfActiveCoursesList = allActiveCourses.size();
         assertNotNull(sizeOfActiveCoursesList);
@@ -110,7 +110,7 @@ class CourseControllerTest {
     @Test
     void getCourseCreatedAfterDate() throws ParseException {
         List<Course> courseList = courseController.getCourseCreatedAfterDate("2023-03-05");
-        assertEquals(0,courseList.size());
+        assertEquals(2, courseList.size());
     }
 
     @Test
@@ -119,56 +119,43 @@ class CourseControllerTest {
         assertNotNull(latestCourseRow);
     }
 
-
     @Test
     void testingGetLatestUpdatedDate() {
-    }
-
-    @Test
-    void createCourse() {
+        Course latestUpdatedDateRow = courseController.getLatestUpdatedDate();
+        assertNotNull(latestUpdatedDateRow);
     }
 
     @Test
     void getCourseByCreatedDate() {
+        List<Course> coursesList = courseController.getCourseByCreatedDate("2022-02-23 11:59:42.6533333");
+        Date createdDate = coursesList.get(0).getCreatedDate();
+        assertEquals("2022-02-23 11:59:42.6533333",createdDate.toString());
     }
 
     @Test
     void getCourseByUpdatedDate() {
+        List<Course> coursesList = courseController.getCourseByUpdatedDate("2022-03-01 14:59:37.0500000");
+        Date updatedDate = coursesList.get(0).getUpdatedDate();
+        assertEquals("2022-03-01 14:59:37.05",updatedDate.toString());
     }
 
     @Test
     void getCourseByStudentId() {
+        List<Course> studentCoursesList = courseController .getCourseByStudentId(3);
+        Integer studentId = studentCoursesList.get(0).getStudent().getId();
+        assertEquals(3,studentId);
     }
 
     @Test
     void getAllActiveCoursesForAStudent() {
+        List<Course> studentActiveCoursesList = courseController.getAllActiveCoursesForAStudent(3);
+        assertNotNull(studentActiveCoursesList);
     }
 
     @Test
-    void deleteCourseById() {
+    void testingSizeOfAllActiveCoursesForAStudent() {
+        List<Course> studentActiveCoursesList = courseController.getAllActiveCoursesForAStudent(3);
+        assertEquals(3,studentActiveCoursesList.size());
     }
 
-    @Test
-    void deleteAllCourses() {
-    }
-
-    @Test
-    void deleteCourseByName() {
-    }
-
-    @Test
-    void deleteCoursesByCreatedDate() {
-    }
-
-    @Test
-    void deleteCoursesByUpdatedDate() {
-    }
-
-    @Test
-    void deleteAllCoursesCreatedAfterDate() {
-    }
-
-    @Test
-    void updateCourse() {
-    }
 }
