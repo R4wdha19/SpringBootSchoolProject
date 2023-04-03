@@ -2,12 +2,14 @@ package com.codeline.SpringBootPractice.School.project.Controller;
 
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.RequestObjects.SchoolRequestForCreateDateUpdate;
+import com.codeline.SpringBootPractice.School.project.Service.ReportService;
 import com.codeline.SpringBootPractice.School.project.Service.SchoolService;
-import com.codeline.SpringBootPractice.School.project.Service.StudentService;
 import com.codeline.SpringBootPractice.School.project.Slack.SlackClient;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,11 @@ public class SchoolController {
     @Autowired
     SchoolService schoolService;
     @Autowired
-   SlackClient slackClient;
+    SlackClient slackClient;
+
+    @Autowired
+    ReportService reportService;
+
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
     public List<School> getAllSchools() {
         List<School> schools = new ArrayList<>();
@@ -145,5 +151,14 @@ public class SchoolController {
         List<School> schoolList = schoolService.getSchoolByNumberOfStudent(numberOFStudents);
         slackClient.sendMessage(schoolService.formatSchoolListForSlack(schoolList).toString());
         return schoolList;
+    }
+
+    @RequestMapping(value = "TestingReports")
+    public String generateReports() throws FileNotFoundException, JRException {
+        return reportService.generateTestingReport();
+    }
+    @RequestMapping(value = "SchoolReports")
+    public String generateSchoolReports() throws FileNotFoundException, JRException {
+        return reportService.generateSchoolReport();
     }
 }

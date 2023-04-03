@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FirstProject" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5faca9a4-018c-4e7d-94de-340572cd25a6">
-    <field name="schoolName" class="java.lang.String">
 
+    <field name="schoolName" class="java.lang.String">
     </field>
     <field name="id" class="java.lang.Integer">
-
     </field>
     <background>
         <band/>
@@ -13,20 +12,22 @@
     <title>
         <band height="72">
             <frame>
-                <reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="86e125dc-8840-429c-91a9-1074a90d6246"/>
+                <reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#E89C31" uuid="86e125dc-8840-429c-91a9-1074a90d6246">
+                    <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+                </reportElement>
                 <staticText>
-                    <reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="4c325490-072f-46b5-b71b-2b31a2debca8"/>
+                    <reportElement x="76" y="20" width="260" height="52" forecolor="#080707" uuid="4c325490-072f-46b5-b71b-2b31a2debca8"/>
                     <textElement>
                         <font size="34" isBold="true"/>
                     </textElement>
-                    <text><![CDATA[FirstProject]]></text>
+                    <text><![CDATA[School System]]></text>
                 </staticText>
                 <staticText>
-                    <reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="b9664b95-19b1-4fd9-80c1-c05b8cffdee4"/>
+                    <reportElement x="260" y="60" width="155" height="20" forecolor="#030303" uuid="b9664b95-19b1-4fd9-80c1-c05b8cffdee4"/>
                     <textElement textAlignment="Right">
                         <font size="14" isBold="false"/>
                     </textElement>
-                    <text><![CDATA[First Project Report]]></text>
+                    <text><![CDATA[School System Report]]></text>
                 </staticText>
             </frame>
         </band>
@@ -40,7 +41,7 @@
                 <reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="dc0f911f-4569-4d65-b41a-4c6b6d7d5fc7"/>
             </line>
             <staticText>
-                <reportElement mode="Opaque" x="0" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="73c58d6e-ee84-4983-9f91-bbe5ed1cf92b">
+                <reportElement mode="Opaque" x="0" y="0" width="277" height="20" forecolor="#F56231" backcolor="#E6E6E6" uuid="73c58d6e-ee84-4983-9f91-bbe5ed1cf92b">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a6ab3d6-3bd4-4152-8761-1f95a30056bd"/>
                 </reportElement>
                 <textElement textAlignment="Center">
@@ -49,7 +50,7 @@
                 <text><![CDATA[School Name]]></text>
             </staticText>
             <staticText>
-                <reportElement mode="Opaque" x="277" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="024c6a9c-5520-4aa9-bb80-571dfa0fa486">
+                <reportElement mode="Opaque" x="277" y="0" width="277" height="20" forecolor="#F56231" backcolor="#E6E6E6" uuid="024c6a9c-5520-4aa9-bb80-571dfa0fa486">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d5dba8d-c6a4-42b7-97c8-34bcbe8726a3"/>
                 </reportElement>
                 <textElement textAlignment="Center">
