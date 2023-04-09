@@ -59,4 +59,7 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
     @Query(value = "update Mark m Set m.isActive = false")
     void deleteAllMarks();
 
+    @Query(value = "SELECT count(m) from Mark m WHERE m.course.courseName = :courseName")
+    Integer getNumberOfMarksByCourseName(@Param("courseName") String courseName);
+
 }
