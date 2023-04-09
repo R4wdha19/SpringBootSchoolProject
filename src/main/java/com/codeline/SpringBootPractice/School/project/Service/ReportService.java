@@ -1,6 +1,7 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
 
+import com.codeline.SpringBootPractice.School.project.DTO.StudentSchoolObject;
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
 import com.codeline.SpringBootPractice.School.project.Repository.SchoolRepository;
@@ -13,6 +14,7 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +26,7 @@ public class ReportService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public static final String pathToReports = "C:\\Users\\user013\\Downloads\\Reports";
+    public static final String pathToReports = "";
     public String generateTestingReport() throws FileNotFoundException, JRException {
         List<School> schoolList = schoolRepository.getAllSchools();
         File file = ResourceUtils.getFile("classpath:SchoolFiles.jrxml");
@@ -37,19 +39,25 @@ public class ReportService {
         return "Report generated : " + pathToReports+"\\testingSchools.pdf";
     }
 
-    public String generateSchoolReport() throws FileNotFoundException, JRException {
-        List<School> schoolList = schoolRepository.getAllSchools();
-        List<Student> allStudents = studentRepository.getAllStudents();
-        File file = ResourceUtils.getFile("classpath:AllSchools.jrxml");
+    public String generateSchoolStudentsReport() throws FileNotFoundException, JRException {
+        List<Student> studentList = studentRepository.getAllStudents();
+        List<StudentSchoolObject> allSchoolsWithTheirStudents =new ArrayList<>();
+
+        for(Student studentObject : studentList){
+            StudentSchoolObject studentSchoolObject = new StudentSchoolObject();
+            studentSchoolObject.setSchoolName(studentObject.getSchool().getSchoolName());
+            studentSchoolObject.setStudentName(studentObject.getStudentName());
+            studentSchoolObject.setStudentRollNumber(studentObject.getStudentRollNumber());
+            allSchoolsWithTheirStudents.add(studentSchoolObject);
+        }
+        File file = ResourceUtils.getFile("classpath:StudentsAndSchools.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(schoolList);
-//        JRBeanCollectionDataSource dataSource2 = new JRBeanCollectionDataSource(allStudents);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(allSchoolsWithTheirStudents);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("CreatedBy", "R");
-        parameters.put("student",allStudents);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters , dataSource);  //fillReport combine it all
-        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\AllSchools.pdf");
-        return "Report generated : " + pathToReports+"\\AllSchools.pdf";
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\allSchoolsWithTheirStudents.pdf");
+        return "Report generated : " + pathToReports+"\\allSchoolsWithTheirStudents.pdf";
     }
 
 //    public String generateCoursesReport() throws FileNotFoundException, JRException {

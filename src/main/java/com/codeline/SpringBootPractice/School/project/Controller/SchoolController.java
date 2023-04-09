@@ -153,12 +153,9 @@ public class SchoolController {
         return schoolList;
     }
 
-    @RequestMapping(value = "TestingReports")
+    @RequestMapping(value = "TestingReport")
     public String generateReports() throws FileNotFoundException, JRException {
         return reportService.generateTestingReport();
     }
-    @RequestMapping(value = "SchoolReports")
-    public String generateSchoolReports() throws FileNotFoundException, JRException {
-        return reportService.generateSchoolReport();
-    }
+
 }

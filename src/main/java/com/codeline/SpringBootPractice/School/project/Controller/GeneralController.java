@@ -2,15 +2,13 @@ package com.codeline.SpringBootPractice.School.project.Controller;
 
 import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
-import com.codeline.SpringBootPractice.School.project.Service.CourseService;
-import com.codeline.SpringBootPractice.School.project.Service.MarkService;
-import com.codeline.SpringBootPractice.School.project.Service.SchoolService;
-import com.codeline.SpringBootPractice.School.project.Service.StudentService;
+import com.codeline.SpringBootPractice.School.project.Service.*;
 import com.codeline.SpringBootPractice.School.project.Slack.SlackClient;
-import com.codeline.SpringBootPractice.School.project.Slack.SlackPayLoad;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @RestController
@@ -31,6 +29,8 @@ public class GeneralController {
     MarkService markService;
     @Autowired
     SlackClient slackClient;
+    @Autowired
+    ReportService reportService;
 
     @RequestMapping(value = "student/getStudentsBySchoolName", method = RequestMethod.GET)
     public List<Student> getStudentsBySchoolName(@RequestParam String schoolName) {
@@ -46,5 +46,10 @@ public class GeneralController {
     @GetMapping(value = "slackMessage")
     public void message(@RequestParam String text){
         slackClient.sendMessage(text);
+    }
+
+    @RequestMapping(value = "SchoolStudentsReport")
+    public String generateSchoolReports() throws FileNotFoundException, JRException {
+        return reportService.generateSchoolStudentsReport();
     }
 }
