@@ -51,7 +51,7 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
     @Query(value = "select * from Mark where updated_date like CONCAT (?1, '%') ", nativeQuery = true)
     List<Mark> getMarksByUpdatedDate(@Param("updatedDate") String updatedDate);
 
-    @Query("select m from Mark m where m.course.id = :courseId")
+    @Query(value="select m from Mark m where m.course.id = :courseId")
     List<Mark> getMarksByCourseId(@Param("courseId") Integer courseId);
 
     @Modifying
@@ -61,5 +61,7 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
 
     @Query(value = "SELECT count(m) from Mark m WHERE m.course.courseName = :courseName")
     Integer getNumberOfMarksByCourseName(@Param("courseName") String courseName);
+    @Query(value = "Select SUM (m.obtainedMarks) from Mark m where m.course.student.id = :studentId ")
+    Integer sumOfMarksByStudentId(@Param("studentId") Integer studentId);
 
 }

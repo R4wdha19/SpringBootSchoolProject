@@ -91,18 +91,6 @@ public class ReportService {
         JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports + "\\CoursesAndMarksReport.pdf");
         return "Report generated : " + pathToReports + "\\CoursesAndMarksReport.pdf";
     }
-//    public String generateAverageMarksReport() throws FileNotFoundException, JRException {
-//        List<School> schoolList = schoolRepository.getAllSchools();
-//        File file = ResourceUtils.getFile("classpath:SchoolFiles.jrxml");
-//        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-//        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(schoolList);
-//        Map<String, Object> parameters = new HashMap<>();
-//        parameters.put("CreatedBy", "R");
-//        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters , dataSource);  //fillReport combine it all
-//        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\AverageMarks.pdf");
-//        return "Report generated : " + pathToReports+"\\AverageMarks.pdf";
-//    }
-
 
     public String averageMarksReport() throws FileNotFoundException, JRException {
         List<Mark> marksList = markRepository.getAllMarks();
@@ -123,10 +111,10 @@ public class ReportService {
             }
         }
 
-        for(String keyCourseName: courseMapWithMark.keySet()){
+        for (String keyCourseName : courseMapWithMark.keySet()) {
             Integer numberOfMarkByCourse = markRepository.getNumberOfMarksByCourseName(keyCourseName);
             Integer marks = courseMapWithMark.get(keyCourseName);
-            Integer average = marks/numberOfMarkByCourse;
+            Integer average = marks / numberOfMarkByCourse;
             CourseMarkObject markObject = new CourseMarkObject();
             markObject.setAverageMark(average);
             markObject.setCourseName(keyCourseName);
@@ -140,5 +128,34 @@ public class ReportService {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);  //fillReport combine it all
         JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports + "\\AverageMarkReport.pdf");
         return "Report generated : " + pathToReports + "\\AverageMarkReport.pdf";
+    }
+
+    public String topPreformingStudentsBasedOnTheMarks() throws FileNotFoundException, JRException {
+        List<Mark> marksList = markRepository.getAllMarks();
+        List<Student> studentList = studentRepository.getAllStudents();
+
+        Map<School, Student> studentSchoolMap = new HashMap<>();
+
+        Map<String, Integer> schoolMarksMap = new HashMap<>();
+
+        for (Student students : studentList) {
+            String studentName = students.getStudentName();
+            Integer studentId = students.getId();
+            Integer studentSchoolId = students.getSchool().getId();
+            List<Course> studentCoursesNames = courseRepository.getCoursesByStudentId(studentId);
+            Integer studentMarks = markRepository.sumOfMarksByStudentId(studentId);
+            String schoolName = students.getSchool().getSchoolName();
+
+            if (schoolMarksMap.containsKey(schoolName) && schoolMarksMap.get(schoolName) < studentMarks)
+            //here we are getting the value against schoolName from the hashMap which is an Integer
+//Checking if The schoolName is there in the hash map then we get the Marks
+
+            {
+                schoolMarksMap.put(schoolName, studentMarks);
+            } else {
+            }
+        }
+
+        return "";
     }
 }
