@@ -1,8 +1,6 @@
 package com.codeline.SpringBootPractice.School.project.Slack;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
 @Component
 public class SlackClient {
 
