@@ -5,12 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-@Setter
 @Getter
-public class CourseMarkObject {
-    String courseName;
-    Integer obtainedMarks;
-    String grade;
-
-    Integer averageMark;
+@Setter
+public class StudentSchoolDTOObject {
+    String studentName;
+    String schoolName;
+    Integer studentRollNumber;
 }

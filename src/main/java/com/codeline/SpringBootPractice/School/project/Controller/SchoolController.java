@@ -154,7 +154,7 @@ public class SchoolController {
     }
 
     @RequestMapping(value = "TestingReport")
-    public String generateReports() throws FileNotFoundException, JRException {
+    public String generateReports() throws Exception{
         return reportService.generateTestingReport();
     }
 

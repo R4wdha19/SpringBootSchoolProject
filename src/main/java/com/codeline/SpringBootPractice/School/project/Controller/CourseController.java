@@ -162,15 +162,5 @@ public class CourseController {
         courseService.updateCourse(courseId, courseName, studentId, isActive);
     }
 
-    @RequestMapping(value = "CoursesAndMarksReport")
-    public String generateCoursesAndMarksReport() throws FileNotFoundException, JRException {
-        return reportService.generateCourseMarksReport();
-    }
-    @RequestMapping(value = "CoursesAndAverageMarksReport")
-    public String generateCoursesAndAverageMarksReport() throws FileNotFoundException, JRException {
-        return reportService.averageMarksReport();
-    }
-
-
 
 }

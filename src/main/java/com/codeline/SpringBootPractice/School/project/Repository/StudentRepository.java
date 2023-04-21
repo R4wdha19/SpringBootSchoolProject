@@ -63,4 +63,12 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query(value = "update Student st Set st.isActive = false")
     void deleteAllStudents();
 
+//    @Query(value = "SELECT s.studentId, s.name, c.courseId, c.courseName, MAX(m.obtainedMarks) AS highestMarks "
+//            + "FROM Student s "
+//            + "JOIN s.courses cs "
+//            + "JOIN cs.course c "
+//            + "JOIN c.marks m "
+//            + "WHERE s.school.schoolId = :schoolId "
+//            + "GROUP BY s.studentId, c.courseId")
+//    Student getStudentWithMaxMarksBySchoolId(Integer schoolId);
 }

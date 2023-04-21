@@ -48,8 +48,5 @@ public class GeneralController {
         slackClient.sendMessage(text);
     }
 
-    @RequestMapping(value = "SchoolStudentsReport")
-    public String generateSchoolReports() throws FileNotFoundException, JRException {
-        return reportService.generateSchoolStudentsReport();
-    }
+
 }

@@ -140,9 +140,10 @@ public class StudentController {
     public void deleteStudentsByUpdatedDate(@RequestParam String updatedDate){
         studentService.deleteStudentsByUpdatedDate(updatedDate);
     }
-    @RequestMapping(value = "updateCourse",method = RequestMethod.POST)
+    @RequestMapping(value = "updateStudent",method = RequestMethod.POST)
     public void updateStudent(@RequestParam Integer id,String studentName, Integer rollNumber, Integer schoolId, Boolean isActive){
         studentService.updateStudent(id,studentName,rollNumber,schoolId,isActive);
     }
+
 
 }
