@@ -17,6 +17,9 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "SELECT c from Course c")
     List<Course> getAllCourses();
 
+    @Query(value = "Select c.courseName from Course c")
+    List<String> getAllCoursesNames();
+
     @Query(value = "SELECT c from Course c where c.id = :courseId")
     Course getCourseById(@Param("courseId") Integer id);
 
@@ -42,21 +45,26 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = " select c from Course c where c.updatedDate = (select Max(c.updatedDate) from Course c)")
     Course getLatestUpdatedDate();
 
+    @Query(value = "select c from Course c where c.student.school.id = :schoolId")
+    List<Course> getCourseBySchoolId(@Param("schoolId") Integer schoolId);
+
     @Modifying
     @Transactional
     @Query(value = "update Course c Set c.isActive = false")
     void deleteAllCourses();
+
     /*getCourseByCreatedDate*/
     @Query(value = "select * from course where created_date like CONCAT (?1, '%') ", nativeQuery = true)
     List<Course> getCourseByCreatedDate(String createdDate);
 
     @Query(value = "select * from course where updated_date like CONCAT (?1, '%') ", nativeQuery = true)
     List<Course> getCourseByUpdatedDate(String updatedDate);
+
     @Query(value = "select c from Course c where c.student.id = :studentId and (c.isActive=1)")
     List<Course> getAllActiveCoursesForAStudent(Integer studentId);
+
     @Query(value = "select c from Course c where c.createdDate >=  :createdDate")
     List<Course> deleteAllCoursesCreatedAfterDate(Date createdDate);
-
 
 
 }

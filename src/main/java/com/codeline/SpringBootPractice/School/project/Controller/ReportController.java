@@ -15,21 +15,39 @@ public class ReportController {
     public String generateSchoolReports() throws Exception {
         return reportService.generateSchoolStudentsReport();
     }
+
     @RequestMapping(value = "CoursesAndMarksReport")
     public String generateCoursesAndMarksReport() throws Exception {
         return reportService.generateCourseMarksReport();
     }
+
     @RequestMapping(value = "CoursesAndAverageMarksReport")
-    public String generateCoursesAndAverageMarksReport() throws Exception{
+    public String generateCoursesAndAverageMarksReport() throws Exception {
         return reportService.averageMarksReport();
     }
+
     @RequestMapping(value = "TopPerformingStudentInEachSchool")
-    public String generateTopPerformingStudentInEachSchool() throws Exception{
+    public String generateTopPerformingStudentInEachSchool() throws Exception {
         return reportService.generateTopPerformingStudentInEachSchool();
     }
 
     @RequestMapping(value = "generateOverAllStudentPerformance")
-    public String generateOverAllStudentPerformance() throws Exception{
+    public String generateOverAllStudentPerformance() throws Exception {
         return reportService.generateOverAllStudentPerformance();
+    }
+
+    @RequestMapping(value = "generateTotalNumberOfStudentsInEachSchool")
+    public String generateTotalNumberOfStudentsInEachSchool() throws Exception {
+        return reportService.generateTotalNumberOfStudentsInEachSchool();
+    }
+
+    @RequestMapping(value = "generateDistributionOfGradesReport")
+    public String generateDistributionOfGradesReport() throws Exception {
+        return reportService.generateTheDistributionOfGrades();
+    }
+
+    @RequestMapping(value = "generateTopPerformanceCoursesInEachSchoolReport")
+    public String generateTopPerformanceCoursesInEachSchool() throws Exception {
+        return reportService.generateTopPerformanceCoursesInEachSchool();
     }
 }

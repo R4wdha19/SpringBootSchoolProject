@@ -1,10 +1,8 @@
 package com.codeline.SpringBootPractice.School.project.Service;
 
 
-import com.codeline.SpringBootPractice.School.project.DTO.CourseMarkDTOObject;
-import com.codeline.SpringBootPractice.School.project.DTO.StudentMarkDTO;
-import com.codeline.SpringBootPractice.School.project.DTO.StudentSchoolDTOObject;
-import com.codeline.SpringBootPractice.School.project.DTO.TopPerformingStudentDTO;
+import com.codeline.SpringBootPractice.School.project.DTO.*;
+import com.codeline.SpringBootPractice.School.project.Model.Course;
 import com.codeline.SpringBootPractice.School.project.Model.Mark;
 import com.codeline.SpringBootPractice.School.project.Model.School;
 import com.codeline.SpringBootPractice.School.project.Model.Student;
@@ -16,7 +14,6 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -142,6 +139,53 @@ public class ReportService {
         return generateAReport("OverallStudentPerformance", "OverallStudentPerformanceReport", dataSource);
     }
 
+    public String generateTotalNumberOfStudentsInEachSchool() throws Exception {
+        List<School> schoolList = schoolRepository.getAllSchools();
+        List<CountOfStudentWithSchoolDTO> countOfStudent = new ArrayList<>();
+        for (School school : schoolList) {
+            Integer schoolId = school.getId();
+            String schoolName = school.getSchoolName();
+            Integer countOfStudents = studentRepository.getCountOfStudentsBySchoolId(schoolId);
+            CountOfStudentWithSchoolDTO countOfStudentWithSchoolDTO = new CountOfStudentWithSchoolDTO(schoolName, countOfStudents);
+            countOfStudent.add(countOfStudentWithSchoolDTO);
+        }
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(countOfStudent);
+        return generateAReport("CountOfStudentsBySchool", "CountOfStudentsBySchool", dataSource);
+    }
+
+    public String generateTheDistributionOfGrades() throws Exception {
+        List<String> coursesNames = courseRepository.getAllCoursesNames();
+        List<String> listOfUniqueGrades = markRepository.getDistinctGrades();
+        List<CourseWithGradesDTO> courseWithGradesDTOS = new ArrayList<>();
+        for (String courseName : coursesNames) {
+            for (String grade : listOfUniqueGrades) {
+                Integer countOfMarksByGradeAndCourseName = markRepository.getCountOfMarksByGradeAndCourseName(grade, courseName);
+                courseWithGradesDTOS.add(new CourseWithGradesDTO(courseName, grade, countOfMarksByGradeAndCourseName));
+            }
+        }
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(courseWithGradesDTOS);
+        return generateAReport("TheDistributionOfGrades", "TheDistributionOfGrades!", dataSource);
+    }
+
+    public String generateTopPerformanceCoursesInEachSchool() throws Exception {
+        List<School> schoolList = schoolRepository.getAllSchools();
+        Map<School, Course> schoolCourseMap = new HashMap<>();
+        List<TopPerformingCourseDTO> topPerformingCourseDTOS = new ArrayList<>();
+        for (School school : schoolList) {
+            Integer schoolId = school.getId();
+            List<Course> courseList = courseRepository.getCourseBySchoolId(schoolId);
+            for (Course course : courseList) {
+                String schoolName = school.getSchoolName();
+                String courseName = course.getCourseName();
+                Integer courseId = course.getId();
+                Integer topPerformingCourse = markRepository.averageMarkForCourse(courseId);
+                schoolCourseMap.put(school, course);
+                topPerformingCourseDTOS.add(new TopPerformingCourseDTO(schoolName, courseName));
+            }
+        }
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(topPerformingCourseDTOS);
+        return generateAReport("topPerformingCourse", "TopPerformingCourseInEachSchool", dataSource);
+    }
 
 
     public String generateAReport(String jasperReportName, String fileName, JRBeanCollectionDataSource dataSource) throws Exception {

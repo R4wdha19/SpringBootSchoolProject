@@ -17,8 +17,17 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
     @Query(value = "SELECT m from Mark m")
     List<Mark> getAllMarks();
 
+    @Query(value = " select Distinct(m.grade) from Mark m ")
+    List<String> getDistinctGrades();
+
+    @Query(value = " select count(m) from Mark m where m.course.courseName = :courseName And m.grade = :grade ")
+    Integer getCountOfMarksByGradeAndCourseName(@Param("grade") String grade, @Param("courseName") String courseName);
+
     @Query(value = "SELECT m from Mark m where m.id = :markId")
     Mark getMarkById(@Param("markId") Integer id);
+
+    @Query(value = " select avg(m.obtainedMarks) from Mark m where m.course.id = :courseId ")
+    Integer averageMarkForCourse(@Param("courseId") Integer courseId);
 
     @Query("select m from Mark m where m.grade = :grade")
     List<Mark> getMarkByGrade(@Param("grade") String grade);
@@ -61,10 +70,11 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
 
     @Query(value = "SELECT count(m) from Mark m WHERE m.course.courseName = :courseName")
     Integer getNumberOfMarksByCourseName(@Param("courseName") String courseName);
+
     @Query(value = "select sum(m.obtainedMarks) from Mark m where m.course.student.id = :studentId ")
-    Integer getSumOfMarksByStudentId(@Param("studentId")Integer studentId);
+    Integer getSumOfMarksByStudentId(@Param("studentId") Integer studentId);
 
     @Query(value = "select avg(m.obtainedMarks) from Mark m where m.course.student.id = :studentId ")
-    Integer getAvgOfMarksByStudentId(@Param("studentId")Integer studentId);
+    Integer getAvgOfMarksByStudentId(@Param("studentId") Integer studentId);
 
 }

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TopPerformanceCoursesInEachSchool" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8e15d519-eab3-497d-b483-a5c1caac3ee0">
+
+    <style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+    <style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+    <style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+    <style name="Detail" fontName="Arial" fontSize="12"/>
+
+    <field name="schoolName" class="java.lang.String">
+    </field>
+    <field name="courseName" class="java.lang.String">
+
+    </field>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="89" splitType="Stretch">
+            <image>
+                <reportElement x="275" y="0" width="300" height="64" uuid="ea5ad761-92e5-4024-9d51-efba4363bb54"/>
+                <imageExpression><![CDATA["leaf_banner_red.png"]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement style="Title" x="-8" y="5" width="380" height="55" uuid="91f5fe7f-a65f-46a3-81ae-30f2d82c45a2"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="16"/>
+                </textElement>
+                <text><![CDATA[Top Performance Courses In
+Each School]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="SubTitle" x="-8" y="56" width="282" height="22" forecolor="#030202" uuid="6931f6fc-c9e8-4cc3-9eec-607a123c87f7"/>
+                <textElement textAlignment="Center">
+                    <font size="11" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Report For Top Performance Courses In Each School]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="36" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="2c4ebb21-8745-45a1-a9ad-477acaac72cb"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement style="Column header" x="0" y="19" width="277" height="15" forecolor="#0D0C0C" uuid="0c5e2bc4-133f-4017-9a07-a8bfd1cc750e">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="79f59ada-08bb-458d-9e1f-cab599cc7347"/>
+                </reportElement>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[School Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Column header" x="277" y="19" width="277" height="15" forecolor="#0D0C0C" uuid="6414c394-ae22-4b59-9e1b-abe8805447dc">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4735a466-187b-4b62-8ad2-ac47dd6619d2"/>
+                </reportElement>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Top Performing Course]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="16" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="ffde0804-90e8-496b-86fb-ee363619f187"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+            <textField>
+                <reportElement style="Detail" x="0" y="0" width="277" height="15" uuid="ff3bdb71-d5be-4180-9a12-3072c801b1ad">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="79f59ada-08bb-458d-9e1f-cab599cc7347"/>
+                </reportElement>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{schoolName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Detail" x="277" y="0" width="277" height="15" uuid="214b819e-bdce-49b5-b4b6-dac1f60f70bb">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4735a466-187b-4b62-8ad2-ac47dd6619d2"/>
+                </reportElement>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{courseName}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="45" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="30093aa1-3dd7-4eea-9cc9-e183637af8f4"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+        </band>
+    </columnFooter>
+    <pageFooter>
+        <band height="20" splitType="Stretch">
+            <textField>
+                <reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="c9e9a989-76ae-4c92-a08c-dba3c3185f04"/>
+                <textElement textAlignment="Right">
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="736cac2d-8f9a-48bb-b4e7-09302ce0e313"/>
+                <textElement>
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="c49bc611-71b3-4860-8112-76288860b48d"/>
+                <textElement>
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>
