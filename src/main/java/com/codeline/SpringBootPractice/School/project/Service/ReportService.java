@@ -139,7 +139,7 @@ public class ReportService {
             studentMarkDTOS.add(studentDto);
         }
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(studentMarkDTOS);
-        return generateAReport("OverallStudentPerformance", "OverallStudentPerformance", dataSource);
+        return generateAReport("OverallStudentPerformance", "OverallStudentPerformanceReport", dataSource);
     }
 
 
