@@ -29,6 +29,10 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
     @Query(value = " select avg(m.obtainedMarks) from Mark m where m.course.id = :courseId ")
     Integer averageMarkForCourse(@Param("courseId") Integer courseId);
 
+    @Query(value = "select count(m.course.student.id) from Mark m where m.obtainedMarks > :courseThreshold AND m.course.courseName = :courseName")
+    Integer countOfStudentsHavingHighScoreInCourse
+            (@Param("courseThreshold") Integer courseThreshold, @Param("courseName") String courseName);
+
     @Query("select m from Mark m where m.grade = :grade")
     List<Mark> getMarkByGrade(@Param("grade") String grade);
 
@@ -76,5 +80,8 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
 
     @Query(value = "select avg(m.obtainedMarks) from Mark m where m.course.student.id = :studentId ")
     Integer getAvgOfMarksByStudentId(@Param("studentId") Integer studentId);
+
+    @Query(value = "select avg(m.obtainedMarks) from Mark m where m.course.student.school.id = :schoolId ")
+    Integer getAvgOfMarksBySchoolId(@Param("schoolId") Integer schoolId);
 
 }

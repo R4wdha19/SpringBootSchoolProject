@@ -102,7 +102,6 @@ public class ReportService {
 
     public String generateTopPerformingStudentInEachSchool() throws Exception {
         List<School> schoolList = schoolRepository.getAllSchools();
-        Map<School, Student> schoolStudentMap = new HashMap<>();
         List<TopPerformingStudentDTO> topPreformingStudentDTOSList = new ArrayList<>();
 
         for (School school : schoolList) {
@@ -117,8 +116,7 @@ public class ReportService {
                     studentWithHighestMarks = student;
                 }
             }
-            schoolStudentMap.put(school, studentWithHighestMarks);
-            topPreformingStudentDTOSList.add(new TopPerformingStudentDTO(studentWithHighestMarks.getStudentName(), school.getSchoolName()));
+            topPreformingStudentDTOSList.add(new TopPerformingStudentDTO(studentWithHighestMarks.getStudentName(), school.getSchoolName())); // DTO removes the need for hash map
         }
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(topPreformingStudentDTOSList);
         return generateAReport("TopPerformingStudent", "TopPerformingStudent", dataSource);
@@ -174,19 +172,46 @@ public class ReportService {
         for (School school : schoolList) {
             Integer schoolId = school.getId();
             List<Course> courseList = courseRepository.getCourseBySchoolId(schoolId);
+            Integer highestAverageMarkForCourses = 0;
+            Course courseWithHighestMark = new Course();
             for (Course course : courseList) {
-                String schoolName = school.getSchoolName();
-                String courseName = course.getCourseName();
                 Integer courseId = course.getId();
-                Integer topPerformingCourse = markRepository.averageMarkForCourse(courseId);
-                schoolCourseMap.put(school, course);
-                topPerformingCourseDTOS.add(new TopPerformingCourseDTO(schoolName, courseName));
+                Integer averageMarkForCourse = markRepository.averageMarkForCourse(courseId);
+                if (averageMarkForCourse != null && averageMarkForCourse > highestAverageMarkForCourses) {
+                    highestAverageMarkForCourses = averageMarkForCourse;
+                    courseWithHighestMark = course;
+                }
+                topPerformingCourseDTOS.add(new TopPerformingCourseDTO(school.getSchoolName(), courseWithHighestMark.getCourseName()));
             }
         }
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(topPerformingCourseDTOS);
         return generateAReport("topPerformingCourse", "TopPerformingCourseInEachSchool", dataSource);
     }
 
+    public String generateStudentWithHighCourseScoreAboveThresholdReport(Integer courseThreshold) throws Exception {
+        List<Course> courseList = courseRepository.getAllCourses();
+        List<CourseWithStudentCountDTO> courseWithStudentCountDTOS = new ArrayList<>();
+        for (Course course : courseList) {
+            String courseName = course.getCourseName();
+            Integer countOfStudents = markRepository.countOfStudentsHavingHighScoreInCourse(courseThreshold, courseName);
+            courseWithStudentCountDTOS.add(new CourseWithStudentCountDTO(courseName, countOfStudents));
+        }
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(courseWithStudentCountDTOS);
+        return generateAReport("CourseWithStudentCount", "StudentWithHighCourseScoreAboveThreshold", dataSource);
+    }
+
+    public String generateOverallPerformanceOfEachSchool() throws Exception {
+        List<School> schoolList = schoolRepository.getAllSchools();
+        List<OverallSchoolStudentPerformanceDTO> overallSchoolStudentPerformanceDTOS = new ArrayList<>();
+        for (School school : schoolList) {
+            String schoolName = school.getSchoolName();
+            Integer schoolId = school.getId();
+            Integer averageOfAllStudentsMarks = markRepository.getAvgOfMarksBySchoolId(schoolId);
+            overallSchoolStudentPerformanceDTOS.add(new OverallSchoolStudentPerformanceDTO(schoolName, averageOfAllStudentsMarks));
+        }
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(overallSchoolStudentPerformanceDTOS);
+        return generateAReport("OverallPerformanceOfEachSchool", "OverallPerformanceOfEachSchoolReport", dataSource);
+    }
 
     public String generateAReport(String jasperReportName, String fileName, JRBeanCollectionDataSource dataSource) throws Exception {
         File file = new File("C:\\Users\\Admin\\Documents\\GitHub\\SpringBootSchoolProject\\src\\main\\resources\\" + jasperReportName + ".jrxml");

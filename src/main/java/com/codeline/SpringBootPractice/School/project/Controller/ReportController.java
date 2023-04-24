@@ -50,4 +50,14 @@ public class ReportController {
     public String generateTopPerformanceCoursesInEachSchool() throws Exception {
         return reportService.generateTopPerformanceCoursesInEachSchool();
     }
+
+    @RequestMapping(value = "StudentWithHighCourseScoreAboveThreshold")
+    public String generateStudentWithHighCourseScoreAboveThreshold(Integer courseThreshold) throws Exception {
+        return reportService.generateStudentWithHighCourseScoreAboveThresholdReport(courseThreshold);
+    }
+
+    @RequestMapping(value = "OverallPerformanceOfEachSchool")
+    public String generateOverallPerformanceOfEachSchool() throws Exception {
+        return reportService.generateOverallPerformanceOfEachSchool();
+    }
 }
